@@ -1,17 +1,56 @@
 {
-  "name": "NAME",
+  "name": "APP_NAME",
   "version": "VERSION",
-  "description": "DESCRIPTION",
+  "description": "APP_DESCRIPTION",
   "repository": "GIT REPOSITORY",
   "bugs": "GIT BUGS PAGE",
   "main": "./main.js",
-  "private": true,
   "keywords": [],
-  "license": "UNLICENSED",
+  "contributors": [
+    {
+      "name": "AUTHOR_NAME",
+      "email": "AUTHOR_EMAIL",
+      "homepage": "https://github.com/AUTHOR_USERNAME"
+    }
+  ],
+  "license": "LICENSE",
   "devDependencies": {
-    "typescript-dev-kit": "^0.0.9"
+    "typescript-dev-kit": "^1"
   },
-  "dependencies": {},
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/typescript-dev-kit/main.js"
+    ]
+  },
+  "dependencies": {
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  },
+  "tsDevKitConfig": {
+    "target": "node",
+    "devServer": {
+      "ip": "0.0.0.0",
+      "port": 3000
+    },
+    "entry": {
+      "main": "./main.ts"
+    },
+    "srcPath": "src",
+    "distPath": "dist",
+    "banner": "/*!\n * Copyright (c) ...\n * All rights reserved.\n */",
+    "env": {
+      "development": {
+        "NODE_ENV": "\"development\""
+      },
+      "production": {
+        "NODE_ENV": "\"production\""
+      }
+    }
+  },
   "scripts": {
     "start": "cd node_modules/typescript-dev-kit/ && node scripts/start",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
