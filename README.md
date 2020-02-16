@@ -1,19 +1,6 @@
-# APP_NAME
+# typescript-boilerplate
 
-APP_DESCRIPTION
-
-## Installation
-
-...
-
-## Development
-
-...
-
-### Configuration
-
-...
-
+Backend/frontend project boilerplate, to start a new Typescript project as fast as a 🚀.
 
 ## Starting a back-end project
 
@@ -31,8 +18,12 @@ APP_DESCRIPTION
     "distPath": "<YOUR_DIST_PATH>",
     "banner": "<YOUR_BANNER>",
     "env": {
-      "development": {},
-      "production": {}
+      "development": {
+        "NODE_ENV": "\"development\""
+      },
+      "production": {
+        "NODE_ENV": "\"production\""
+      }
     }
   },
   ...
