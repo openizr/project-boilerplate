@@ -15,7 +15,7 @@
   ],
   "license": "LICENSE",
   "devDependencies": {
-    "typescript-dev-kit": "^1.1.0"
+    "typescript-dev-kit": "^2.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -24,11 +24,11 @@
   },
   "dependencies": {
     "@types/prop-types": "^15.7.3",
-    "@types/react": "^16.9.19",
+    "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "tsDevKitConfig": {
     "target": "web",
@@ -53,7 +53,7 @@
     }
   },
   "scripts": {
-    "start": "cd node_modules/typescript-dev-kit/ && node scripts/start",
+    "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
     "doc": "node_modules/.bin/typedoc --out ./doc/ src/ --exclude \"**/__+(tests|mocks)__/**\""
