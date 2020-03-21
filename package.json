@@ -15,7 +15,7 @@
   ],
   "license": "LICENSE",
   "devDependencies": {
-    "typescript-dev-kit": "^2.0.0"
+    "typescript-dev-kit": "^2.0.1"
   },
   "eslintConfig": {
     "extends": [
@@ -24,11 +24,11 @@
   },
   "dependencies": {
     "@types/prop-types": "^15.7.3",
-    "@types/react": "^16.9.23",
+    "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "tsDevKitConfig": {
     "target": "web",
