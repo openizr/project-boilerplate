@@ -8877,10 +8877,10 @@ typedoc@^0.18.0:
     shelljs "^0.8.4"
     typedoc-default-themes "^0.10.2"
 
-typescript-dev-kit@^2.0.1:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/typescript-dev-kit/-/typescript-dev-kit-2.2.0.tgz#f923a6bc1e4404b715c48a3e2f01fed807639355"
-  integrity sha512-6mH+S/5l9pmRMRXRRqjmXUP1E5WqAbOWiMACOx8stLmecDfZ/wsl2BDOPQCTvkXmVM9TmzFhEc08F4EOyGusNw==
+typescript-dev-kit@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/typescript-dev-kit/-/typescript-dev-kit-2.2.1.tgz#22c50637b920c7380ca70f89694a6456d8e2cf77"
+  integrity sha512-dJLNsGk/pFex3WY45ecU0D4zVjmRyiPAytWsS4juItMLMdMAxq0h2/iu1O1NcXYyQxzV5qk6qBnDeRiOO0a+mw==
   dependencies:
     "@babel/core" "^7.11.4"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
