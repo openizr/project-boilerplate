@@ -53,6 +53,7 @@
     }
   },
   "scripts": {
+    "init": "node_modules/typescript-dev-kit/scripts/init.sh",
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
