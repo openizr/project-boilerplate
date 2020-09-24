@@ -15,7 +15,7 @@
   ],
   "license": "LICENSE",
   "devDependencies": {
-    "typescript-dev-kit": "^2.2.1"
+    "typescript-dev-kit": "^2.2.3"
   },
   "eslintConfig": {
     "extends": [
