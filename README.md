@@ -1,4 +1,4 @@
-# typescript-boilerplate
+# project-boilerplate
 
 Backend/frontend project boilerplate, to start a new JavaScript/Typescript project as fast as a 🚀.
 
