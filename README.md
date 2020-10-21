@@ -16,6 +16,7 @@ Based on the [typescript-dev-kit](https://github.com/openizr/typescript-dev-kit)
     "entry": {
       "main": "<YOUR_MAIN_ENTRYPOINT>"
     },
+    "runInDev": true,
     "srcPath": "<YOUR_SRC_PATH>",
     "distPath": "<YOUR_DIST_PATH>",
     "banner": "<YOUR_BANNER>",
