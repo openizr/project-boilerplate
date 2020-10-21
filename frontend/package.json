@@ -15,7 +15,7 @@
   ],
   "license": "LICENSE",
   "devDependencies": {
-    "typescript-dev-kit": "^2.2.3"
+    "typescript-dev-kit": "^2.3.1"
   },
   "eslintConfig": {
     "extends": [
@@ -28,9 +28,8 @@
     "@types/react-dom": "^16.9.8",
     "axios": "^0.20.0",
     "basx": "^1.0.0",
-    "diox": "^2.0.0",
+    "diox": "^2.0.1",
     "localforage": "^1.9.0",
-    "path-to-regexp": "^6.2.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
