@@ -1,5 +1,5 @@
 {
-  "name": "APP_NAME",
+  "name": "APP_NAME-frontend",
   "version": "VERSION",
   "description": "APP_DESCRIPTION",
   "repository": "GIT REPOSITORY",
@@ -23,21 +23,30 @@
     ]
   },
   "dependencies": {
-    "@types/ajv-errors": "^1.0.2",
-    "ajv-errors": "^1.0.1",
-    "fastify": "^3.6.0",
-    "fastify-cors": "^4.1.0",
-    "fastify-helmet": "^5.0.3"
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.47",
+    "@types/react-dom": "^16.9.8",
+    "axios": "^0.20.0",
+    "basx": "^1.0.0",
+    "diox": "^2.0.0",
+    "localforage": "^1.9.0",
+    "path-to-regexp": "^6.2.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "tsDevKitConfig": {
-    "target": "node",
+    "target": "web",
     "entry": {
-      "main": "./scripts/main.ts"
+      "main": "./scripts/main.tsx"
     },
-    "runOnDev": true,
+    "devServer": {
+      "ip": "0.0.0.0",
+      "port": 3000
+    },
     "splitChunks": true,
     "srcPath": "src",
-    "distPath": "dist",
+    "distPath": "public",
     "banner": "/*!\n * Copyright (c) ...\n * All rights reserved.\n */",
     "env": {
       "development": {

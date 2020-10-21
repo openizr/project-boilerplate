@@ -61,3 +61,13 @@ Based on the [typescript-dev-kit](https://github.com/openizr/typescript-dev-kit)
   },
   ...
 ```
+
+## Usage
+
+At the root of the repository, just run:
+
+```bash
+docker-compose up
+```
+
+/!\ Docker must be installed on your machine.

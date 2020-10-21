@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  backend:
+    container_name: ${PROJECT_NAME}_backend
+    image: node:14-alpine
+    env_file:
+      - .env
+    ports:
+      - "${HOST_BACKEND_PORT}:${PORT}"
+    entrypoint: ""
+    command: sh -c "cd /var/www/html && yarn install && yarn run dev"
+    volumes:
+      - ./backend:/var/www/html
+    restart: on-failure
+  frontend:
+    container_name: ${PROJECT_NAME}_frontend
+    image: node:14-alpine
+    env_file:
+      - .env
+    ports:
+      - "${HOST_FRONTEND_PORT}:${FRONTEND_PORT}"
+    entrypoint: ""
+    command: sh -c "cd /var/www/html && yarn install && yarn run dev"
+    volumes:
+      - ./frontend:/var/www/html
+    restart: on-failure

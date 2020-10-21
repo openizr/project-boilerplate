@@ -1,0 +1,53 @@
+{
+  "name": "APP_NAME-backend",
+  "version": "VERSION",
+  "description": "APP_DESCRIPTION",
+  "repository": "GIT REPOSITORY",
+  "bugs": "GIT BUGS PAGE",
+  "main": "./main.js",
+  "keywords": [],
+  "contributors": [
+    {
+      "name": "AUTHOR_NAME",
+      "email": "AUTHOR_EMAIL",
+      "homepage": "https://github.com/AUTHOR_USERNAME"
+    }
+  ],
+  "license": "LICENSE",
+  "devDependencies": {
+    "typescript-dev-kit": "^2.2.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/typescript-dev-kit/main.js"
+    ]
+  },
+  "dependencies": {
+    "@types/ajv-errors": "^1.0.2",
+    "ajv-errors": "^1.0.1",
+    "basx": "^1.0.0",
+    "fastify": "^3.6.0"
+  },
+  "tsDevKitConfig": {
+    "target": "node",
+    "entry": {
+      "main": "./scripts/main.ts"
+    },
+    "runOnDev": true,
+    "splitChunks": true,
+    "srcPath": "src",
+    "distPath": "dist",
+    "banner": "/*!\n * Copyright (c) ...\n * All rights reserved.\n */",
+    "env": {
+      "development": {},
+      "production": {}
+    }
+  },
+  "scripts": {
+    "init": "node_modules/typescript-dev-kit/scripts/init.sh",
+    "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
+    "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
+    "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
+    "doc": "node_modules/.bin/typedoc --out ./doc/ src/ --exclude \"**/__+(tests|mocks)__/**\""
+  }
+}

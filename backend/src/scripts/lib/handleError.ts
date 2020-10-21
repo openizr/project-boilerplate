@@ -51,7 +51,7 @@ export default function handleError(
   } else if (error instanceof TooManyRequests) {
     statusCode = 429;
   } else if (error.validation !== undefined) {
-    message = error.validation[0].message;
+    statusCode = 400;
   } else if (error instanceof SyntaxError) {
     statusCode = 422;
   }
@@ -60,11 +60,10 @@ export default function handleError(
   if (statusCode === 500) {
     request.log.error(error);
   } else {
-    message = error.message;
+    message = (error.validation !== undefined) ? error.validation[0].message : error.message;
   }
 
   response
     .status(statusCode)
-    .header('Access-Control-Allow-Origin', '*')
     .send({ error: { code: statusCode, message } });
 }

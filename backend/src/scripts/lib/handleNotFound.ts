@@ -17,6 +17,5 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 export default function handleNotFound(_request: FastifyRequest, response: FastifyReply): void {
   response
     .status(404)
-    .header('Access-Control-Allow-Origin', '*')
     .send({ error: { code: 404, message: 'Not Found' } });
 }
