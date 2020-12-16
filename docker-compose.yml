@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${HOST_BACKEND_PORT}:${PORT}"
+      - "${HOST_BACKEND_PORT}:${BACKEND_PORT}"
     entrypoint: ""
     command: sh -c "cd /var/www/html && yarn install && yarn run dev"
     volumes:
