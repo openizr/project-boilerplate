@@ -1205,10 +1205,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@types/ajv-errors@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@types/ajv-errors/-/ajv-errors-1.0.2.tgz#963eadef9bfb51c47d110281433b626324a63329"
-  integrity sha512-lPgE0OZUGD9xZqj/83mSpdZzGQVY553/uCxmAEOSYUwlfW+azx/yYVUYZurmoiUhzRt+K4GKfOXPvKJmFdA6lg==
+"@types/ajv-errors@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/ajv-errors/-/ajv-errors-1.0.3.tgz#92bc0c849f25cc73ced967732145115d7b44b449"
+  integrity sha512-lXvAtvKL4Fiyxog+Czma/APGjRFbAGUiMpsD2EQUDCMwW0m4UUEwj+FJAuRNKgBZD68mRIO3GtR2aOHV3ADVDQ==
   dependencies:
     ajv "*"
 
@@ -4067,10 +4067,10 @@ fastify-warning@^0.2.0:
   resolved "https://registry.yarnpkg.com/fastify-warning/-/fastify-warning-0.2.0.tgz#e717776026a4493dc9a2befa44db6d17f618008f"
   integrity sha512-s1EQguBw/9qtc1p/WTY4eq9WMRIACkj+HTcOIK1in4MV5aFaQC9ZCIt0dJ7pr5bIf4lPpHvAtP2ywpTNgs7hqw==
 
-fastify@^3.6.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/fastify/-/fastify-3.7.0.tgz#b177cbb50efe4d38a3758427432f46eb873843b1"
-  integrity sha512-xmiR1TOSNXXNHfEvBwhWlyj158q59vZkPLIKQ71f7qJG5QMPqCbeYUUFRaDKTaLFhRqmLLFprBpJsO5nbSMiPQ==
+fastify@^3.9.2:
+  version "3.9.2"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-3.9.2.tgz#20007d1a558cf8c88a8ef2936b4e484553fdf706"
+  integrity sha512-8VEf4l6a2tdtrYQQwgT9Zh2/OvOgE4Sf6cDNMduAnKZ44CXrT0tXuH/uQkXuxqMAW27ZOy4jeexBl8CFaECntg==
   dependencies:
     abstract-logging "^2.0.0"
     ajv "^6.12.2"
@@ -4078,7 +4078,7 @@ fastify@^3.6.0:
     fast-json-stringify "^2.2.1"
     fastify-error "^0.2.0"
     fastify-warning "^0.2.0"
-    find-my-way "^3.0.0"
+    find-my-way "^3.0.5"
     flatstr "^1.0.12"
     light-my-request "^4.2.0"
     pino "^6.2.1"
@@ -4191,10 +4191,10 @@ find-cache-dir@^3.3.1:
     make-dir "^3.0.2"
     pkg-dir "^4.1.0"
 
-find-my-way@^3.0.0:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/find-my-way/-/find-my-way-3.0.4.tgz#a485973d1a3fdafd989ac9f12fd2d88e83cda268"
-  integrity sha512-Trl/mNAVvTgCpo9ox6yixkwiZUvecKYUQZoAuMCBACsgGqv+FbWe+jE5sBA5+U8LIWrJk/cw8zPV53GPrjTnsw==
+find-my-way@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/find-my-way/-/find-my-way-3.0.5.tgz#f71c5ef1b4865401e1b97ba428121a8f55439eec"
+  integrity sha512-FweGg0cv1sBX8z7WhvBX5B5AECW4Zdh/NiB38Oa0qwSNIyPgRBCl/YjxuZn/rz38E/MMBHeVKJ22i7W3c626Gg==
   dependencies:
     fast-decode-uri-component "^1.0.1"
     safe-regex2 "^2.0.0"
@@ -9179,10 +9179,10 @@ typedoc@^0.19.2:
     shelljs "^0.8.4"
     typedoc-default-themes "^0.11.4"
 
-typescript-dev-kit@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/typescript-dev-kit/-/typescript-dev-kit-2.3.2.tgz#00485765018251185c3e86c714c12a4a5f060729"
-  integrity sha512-kfRxPBqPyWuTgttbOosbe7y9PYnuyRZ1Qr4D4h+ec+Q4ye62+rfMXeadoofbj1WfYQOjlOHANuepGyxKGE/RFw==
+typescript-dev-kit@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/typescript-dev-kit/-/typescript-dev-kit-2.3.3.tgz#4738969269c212492e5d5f793e10b6ff7f3aa992"
+  integrity sha512-YaYp9cNZxIul/Uo/SVnZ8xMVznQPfTsc4r3onLFHn1P3OTOmKpcAKKux7UGAZsljK/TDXIS6t772cSX7rSEB2g==
   dependencies:
     "@babel/core" "^7.12.3"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"

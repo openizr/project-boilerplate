@@ -4,9 +4,9 @@
  */
 
 import * as React from 'react';
-import getMessage from 'scripts/api';
-import PropTypes, { InferProps } from 'prop-types';
 import Message from 'scripts/components/Message';
+import PropTypes, { InferProps } from 'prop-types';
+import { getMessage, postMessage } from 'scripts/api';
 
 const propTypes = {
   translate: PropTypes.func.isRequired,
@@ -23,8 +23,14 @@ export default function Home(props: InferProps<typeof propTypes>): JSX.Element {
       setLabel(response.message);
     });
   }, []);
+  const submit = (): void => {
+    postMessage('OK');
+  };
   return (
-    <Message label={translate(label)} />
+    <section>
+      <Message label={translate(label)} />
+      <button type="button" onClick={submit}>Submit</button>
+    </section>
   );
 }
 

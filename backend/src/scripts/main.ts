@@ -25,9 +25,14 @@ app.setNotFoundHandler(handleNotFound);
 
 // Handles CORS in development mode.
 if (configuration.mode === 'development') {
-  app.addHook('onSend', (_request, response, _payload, next) => {
+  app.addHook('onRequest', (request, response, next) => {
     response.header('Access-Control-Allow-Origin', '*');
-    next(null, _payload);
+    response.header('Access-Control-Allow-Headers', '*');
+    if (request.method === 'OPTIONS') {
+      response.status(200).send();
+    } else {
+      next();
+    }
   });
 }
 
@@ -37,7 +42,7 @@ declareRoutes(app);
 // Starting server...
 app.listen(configuration.port, '0.0.0.0', (error) => {
   if (error) {
-    app.log.fatal(error);
+    app.log.fatal(error.stack as string);
     process.exit(1);
   }
 });

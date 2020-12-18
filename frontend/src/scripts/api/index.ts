@@ -5,9 +5,19 @@
 
 import axios from 'axios';
 
-export default function getMessage(): Promise<{ message: string }> {
+const baseUrl = process.env.API_URL;
+
+export function getMessage(): Promise<{ message: string }> {
   return axios.request({
     method: 'GET',
-    url: 'http://localhost:8081/v1/message',
+    url: `${baseUrl}/v1/message`,
+  }).then((response) => response.data);
+}
+
+export function postMessage(message: string): Promise<{ message: string }> {
+  return axios.request({
+    method: 'POST',
+    url: `${baseUrl}/v1/message`,
+    data: { message },
   }).then((response) => response.data);
 }

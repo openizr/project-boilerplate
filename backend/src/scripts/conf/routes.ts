@@ -18,5 +18,5 @@ export default (server: FastifyInstance): void => {
     app.get('/message', v1GetMessage);
     app.post('/message', v1PostMessage);
     done();
-  }, { prefix: '/v1' });
+  }, { prefix: '/api/v1' });
 };

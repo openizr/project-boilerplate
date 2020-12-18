@@ -1314,10 +1314,10 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
-"@types/react-dom@^16.9.9":
-  version "16.9.9"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.9.tgz#d2d0a6f720a0206369ccbefff752ba37b9583136"
-  integrity sha512-jE16FNWO3Logq/Lf+yvEAjKzhpST/Eac8EMd1i4dgZdMczfgqC8EjpxwNgEe3SExHYLliabXDh9DEhhqnlXJhg==
+"@types/react-dom@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.0.tgz#b3b691eb956c4b3401777ee67b900cb28415d95a"
+  integrity sha512-lUqY7OlkF/RbNtD5nIq7ot8NquXrdFrjSOR6+w9a9RFQevGi1oZO1dcJbXMeONAPKtZ2UrZOEJ5UOCVsxbLk/g==
   dependencies:
     "@types/react" "*"
 
@@ -1329,10 +1329,10 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@^16.9.55":
-  version "16.9.55"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.55.tgz#47078587f5bfe028a23b6b46c7b94ac0d436acff"
-  integrity sha512-6KLe6lkILeRwyyy7yG9rULKJ0sXplUsl98MGoCfpteXf9sPWFWWMknDcsvubcpaTdBuxtsLF6HDUwdApZL/xIg==
+"@types/react@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
+  integrity sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -9086,10 +9086,10 @@ typedoc@^0.19.2:
     shelljs "^0.8.4"
     typedoc-default-themes "^0.11.4"
 
-typescript-dev-kit@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/typescript-dev-kit/-/typescript-dev-kit-2.3.2.tgz#00485765018251185c3e86c714c12a4a5f060729"
-  integrity sha512-kfRxPBqPyWuTgttbOosbe7y9PYnuyRZ1Qr4D4h+ec+Q4ye62+rfMXeadoofbj1WfYQOjlOHANuepGyxKGE/RFw==
+typescript-dev-kit@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/typescript-dev-kit/-/typescript-dev-kit-2.3.3.tgz#4738969269c212492e5d5f793e10b6ff7f3aa992"
+  integrity sha512-YaYp9cNZxIul/Uo/SVnZ8xMVznQPfTsc4r3onLFHn1P3OTOmKpcAKKux7UGAZsljK/TDXIS6t772cSX7rSEB2g==
   dependencies:
     "@babel/core" "^7.12.3"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"

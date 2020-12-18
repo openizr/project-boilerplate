@@ -9,35 +9,15 @@ import { store } from 'scripts/store';
 import routes from 'scripts/store/routes';
 import useStore from 'diox/connectors/react';
 import PropTypes, { InferProps } from 'prop-types';
+import ErrorBoundary from 'scripts/components/ErrorBoundary';
+
+type LazyComponent = () => Promise<{ default: React.ComponentType<{ translate: () => string }> }>;
 
 const [useCombiner] = useStore(store);
 
-/* eslint-disable */
 const propTypes = {
   locale: PropTypes.instanceOf(Object).isRequired,
 };
-
-class ErrorBoundary extends React.Component {
-  constructor(props: any) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: any, errorInfo: any) {
-    console.log(error, errorInfo);
-  }
-
-  render() {
-    if ((this.state as any).hasError) { // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
-    }
-    return this.props.children;
-  }
-}
 
 /**
  * App router.
@@ -47,21 +27,20 @@ export default function Router(props: InferProps<typeof propTypes>): JSX.Element
   const { locale } = props;
   const { route } = routing;
 
-  let Aea;
-  let elem = <div />;
+  let currentPage = null;
   if (routes[route] !== undefined) {
-    Aea = React.lazy(routes[route] as any);
-    elem = <Aea translate={i18n(locale as any)} />;
+    const Component = React.lazy(routes[route] as LazyComponent);
+    currentPage = <Component translate={i18n(locale as Record<string, string>)} />;
   }
 
   return (
     <section>
       <ErrorBoundary>
         <Suspense fallback={<div>LOADING...</div>}>
-          {elem}
+          {currentPage}
         </Suspense>
       </ErrorBoundary>
-    </section >
+    </section>
   );
 }
 

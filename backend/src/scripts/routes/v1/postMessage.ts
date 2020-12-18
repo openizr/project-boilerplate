@@ -11,9 +11,10 @@ import { FastifyRequest, FastifyReply } from 'fastify';
  * `POST /v1/message` endpoint handler.
  */
 export default {
-  handler: (_request: FastifyRequest, response: FastifyReply): void => {
-    response.send();
-  },
+  handler: (_request: FastifyRequest, response: FastifyReply): Promise<void> => Promise.resolve()
+    .then(() => {
+      response.send();
+    }),
   schema: deepMerge(schema,
     {
       body: {
