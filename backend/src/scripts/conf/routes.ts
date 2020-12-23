@@ -12,7 +12,7 @@ import v1PostMessage from 'scripts/routes/v1/postMessage';
  */
 export default (server: FastifyInstance): void => {
   /**
-   * V1 endpoints.
+   * V1 API endpoints.
    */
   server.register((app, _options, done) => {
     app.get('/message', v1GetMessage);
