@@ -1,8 +1,9 @@
 # dependencies
 node_modules
 
-# testing
+# testing & analyzer
 coverage
+report.html
 
 # production
 build
