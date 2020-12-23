@@ -3,10 +3,7 @@ version: "3"
 services:
   backend:
     container_name: ${PROJECT_NAME}_backend
-    image: nodejs:14
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: node:14-alpine
     env_file:
       - .env
     ports:
