@@ -1,4 +1,4 @@
-version: "3"
+version: "3.6"
 
 services:
   backend:
@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${HOST_BACKEND_PORT}:${BACKEND_PORT}"
+      - "127.0.0.1:${HOST_BACKEND_PORT}:${BACKEND_PORT}"
     entrypoint: ""
     command: sh -c "cd /var/www/html && yarn install && yarn run dev"
     volumes:
@@ -19,7 +19,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${HOST_FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "127.0.0.1:${HOST_FRONTEND_PORT}:${FRONTEND_PORT}"
     entrypoint: ""
     command: sh -c "cd /var/www/html && yarn install && yarn run dev"
     volumes:
