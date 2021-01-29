@@ -12,7 +12,25 @@ services:
     command: sh -c "cd /var/www/html && yarn install && yarn run dev"
     volumes:
       - ./backend:/var/www/html
-    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 50M
+        reservations:
+          cpus: "0.25"
+          memory: 20M
+    healthcheck:
+      test: "wget --spider http://127.0.0.1:${BACKEND_PORT}/health"
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
   frontend:
     container_name: ${PROJECT_NAME}_frontend
     image: node:14-alpine
@@ -24,4 +42,22 @@ services:
     command: sh -c "cd /var/www/html && yarn install && yarn run dev"
     volumes:
       - ./frontend:/var/www/html
-    restart: on-failure
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 50M
+        reservations:
+          cpus: "0.25"
+          memory: 20M
+    healthcheck:
+      test: "wget --spider http://127.0.0.1:${FRONTEND_PORT}/assets/scripts/runtime.js"
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
