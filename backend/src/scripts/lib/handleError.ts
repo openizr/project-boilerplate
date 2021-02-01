@@ -53,7 +53,7 @@ export default function handleError(
   } else if (error.validation !== undefined) {
     statusCode = 400;
   } else if (error instanceof SyntaxError) {
-    statusCode = 422;
+    statusCode = 500;
   }
 
   // Only HTTP 500 errors must be logged, and reason should not be displayed to end user.
