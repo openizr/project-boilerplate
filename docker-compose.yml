@@ -10,8 +10,10 @@ services:
       - "127.0.0.1:${HOST_BACKEND_PORT}:${BACKEND_PORT}"
     entrypoint: ""
     command: sh -c "cd /var/www/html && yarn install && yarn run dev"
+    working_dir: /var/www/html
     volumes:
       - ./backend:/var/www/html
+      - /var/www/html/node_modules
     deploy:
       restart_policy:
         condition: on-failure
@@ -40,8 +42,10 @@ services:
       - "127.0.0.1:${HOST_FRONTEND_PORT}:${FRONTEND_PORT}"
     entrypoint: ""
     command: sh -c "cd /var/www/html && yarn install && yarn run dev"
+    working_dir: /var/www/html
     volumes:
       - ./frontend:/var/www/html
+      - /var/www/html/node_modules
     deploy:
       restart_policy:
         condition: on-failure
