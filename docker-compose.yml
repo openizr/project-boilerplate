@@ -13,7 +13,6 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./backend:/var/www/html
-      - /var/www/html/node_modules
     deploy:
       restart_policy:
         condition: on-failure
@@ -45,7 +44,6 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./frontend:/var/www/html
-      - /var/www/html/node_modules
     deploy:
       restart_policy:
         condition: on-failure
