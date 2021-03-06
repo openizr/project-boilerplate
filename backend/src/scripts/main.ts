@@ -7,8 +7,8 @@ import fastify from 'fastify';
 import ajvErrors from 'ajv-errors';
 import configuration from 'scripts/conf/app';
 import declareRoutes from 'scripts/conf/routes';
-import handleError from 'scripts/lib/handleError';
-import handleNotFound from 'scripts/lib/handleNotFound';
+import handleError from 'scripts/helpers/handleError';
+import handleNotFound from 'scripts/helpers/handleNotFound';
 
 // Initializing fastify server...
 const app = fastify({

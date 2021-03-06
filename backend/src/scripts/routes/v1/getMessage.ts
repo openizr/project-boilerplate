@@ -4,7 +4,7 @@
  */
 
 import { deepMerge } from 'basx';
-import schema from 'scripts/lib/baseSchema';
+import schema from 'scripts/helpers/baseSchema';
 import { FastifyRequest, FastifyReply } from 'fastify';
 
 /**
