@@ -4,71 +4,46 @@ Backend/frontend project boilerplate, to start a new JavaScript/Typescript proje
 
 Based on the [typescript-dev-kit](https://github.com/openizr/typescript-dev-kit)
 
-## Starting a back-end project
 
-1. ```bash yarn install```
-2. ```bash yarn run init```
-3. Configure `package.json`:
-```json
-  ...
-  "tsDevKitConfig": {
-    "target": "node",
-    "entry": {
-      "main": "<YOUR_MAIN_ENTRYPOINT>"
-    },
-    "runInDev": true,
-    "srcPath": "<YOUR_SRC_PATH>",
-    "distPath": "<YOUR_DIST_PATH>",
-    "banner": "<YOUR_BANNER>",
-    "env": {
-      "development": {
-        "NODE_ENV": "\"development\""
-      },
-      "production": {
-        "NODE_ENV": "\"production\""
-      }
-    }
-  },
-  ...
-```
+## Project structure
 
-## Starting a front-end project
+### `backend`
 
-1. ```bash ./scripts/init.sh```
-2. ```bash yarn install```
-3. Configure `package.json`:
-```json
-  ...
-  "tsDevKitConfig": {
-    "target": "web",
-    "devServer": {
-      "ip": "0.0.0.0",
-      "port": 3000
-    },
-    "entry": {
-      "main": "<YOUR_MAIN_ENTRYPOINT>"
-    },
-    "srcPath": "<YOUR_ASSETS_PATH>",
-    "distPath": "<YOUR_PUBLIC_PATH>",
-    "banner": "<YOUR_BANNER>",
-    "env": {
-      "development": {
-        "NODE_ENV": "\"development\""
-      },
-      "production": {
-        "NODE_ENV": "\"production\""
-      }
-    }
-  },
-  ...
-```
+Contains the back-end (server) codebase.
+
+- `backend/src/scripts/conf`: global configuration (environment variables, endpoints declaration, common services, ...)
+- `backend/src/scripts/hooks`: API hooks (aka middlewares)
+- `backend/src/scripts/lib`: external services clients (APIs, databases, cache, ...) implementation
+- `backend/src/scripts/locale`: translated labels, one file per language
+- `backend/src/scripts/routes`: API endpoints implementation
+
+### `frontend`
+
+Contains the front-end (in-browser UI) codebase.
+
+- `frontend/public`: public assets, served statically (HTML, JS, CSS, fonts, images, ...)
+- `frontend/src/styles/components`: app-specific components' design SASS implementation
+- `frontend/src/styles/pages`: app-specific pages' design SASS implementation
+- `frontend/src/styles/_variables.scss`: global design system configuration (colors, fonts, ...)
+- `frontend/src/scripts/components`: UI components React implementation
+- `frontend/src/scripts/containers`: UI containers React implementation (based on [`diox`](https://github.com/openizr/diox))
+- `frontend/src/scripts/helpers`: utility functions
+- `frontend/src/scripts/lib`: external services clients (APIs, databases, cache, ...) implementation
+- `frontend/src/scripts/locale`: translated labels, one file per language
+- `frontend/src/scripts/pages`: UI pages React implementation
+- `frontend/src/scripts/store`: store modules implementation (based on [`diox`](https://github.com/openizr/diox))
+
 
 ## Usage
 
-At the root of the repository, just run:
+/!\ [Docker](https://www.docker.com/) must be installed on your machine. /!\
 
-```bash
-docker-compose up
-```
+At the root of the repository:
 
-/!\ Docker must be installed on your machine.
+1. `cp .env.example` `.env`
+2. Complete your `.env` file with missing values
+3. `docker-compose up` (this might take a little while to start-up on the first time)
+4. `docker exec -it [PROJECT_NAME]_database /src/init.sh`
+
+You can then navigate through the UI in your browser (`http://localhost:[FRONTEND_PORT])`), or
+call the back-end API (`http://localhost:[BACKEND_PORT])`)
