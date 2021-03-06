@@ -58,7 +58,7 @@ export default function handleError(
 
   // Only HTTP 500 errors must be logged, and reason should not be displayed to end user.
   if (error.statusCode === 400) {
-    statusCode = 422;
+    statusCode = 400;
     message = 'Invalid JSON payload';
   } else if (statusCode === 500) {
     request.log.error(error.stack as string);

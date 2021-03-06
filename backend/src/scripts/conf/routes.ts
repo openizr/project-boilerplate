@@ -15,6 +15,7 @@ export default (server: FastifyInstance): void => {
    * V1 API endpoints.
    */
   server.register((app, _options, done) => {
+    app.head('/message', (_request, response) => { response.send(); });
     app.get('/message', v1GetMessage);
     app.post('/message', v1PostMessage);
     done();
