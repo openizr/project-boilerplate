@@ -40,9 +40,7 @@ if (configuration.mode === 'development') {
 // Catch-all for unsupported content types. Prevents fastify from throwing HTTP 500 when dealing
 // with unknown payloads. See https://www.fastify.io/docs/latest/ContentTypeParser/.
 app.addContentTypeParser('*', (_request, payload, next) => {
-  let data = '';
-  payload.on('data', (chunk) => { data += chunk; });
-  payload.on('end', () => { next(null, data); });
+  next(null, payload);
 });
 
 // Adding app routes...
