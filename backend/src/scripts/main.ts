@@ -28,6 +28,7 @@ if (configuration.mode === 'development') {
   app.addHook('onRequest', (request, response, next) => {
     response.header('Access-Control-Allow-Origin', '*');
     response.header('Access-Control-Allow-Headers', '*');
+    response.header('Access-Control-Allow-Methods', '*');
     if (request.method === 'OPTIONS') {
       response.status(200).send();
     } else {
