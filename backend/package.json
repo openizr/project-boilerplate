@@ -15,6 +15,9 @@
   ],
   "license": "LICENSE",
   "devDependencies": {
+    "@types/ajv-errors": "^1.0.3",
+    "@types/multiparty": "^0.0.32",
+    "@types/fs-extra": "^9.0.6",
     "typescript-dev-kit": "^2.3.3"
   },
   "eslintConfig": {
@@ -23,10 +26,11 @@
     ]
   },
   "dependencies": {
-    "@types/ajv-errors": "^1.0.3",
     "ajv-errors": "^1.0.1",
     "basx": "^1.0.0",
-    "fastify": "^3.9.2"
+    "fastify": "^3.9.2",
+    "fs-extra": "^9.1.0",
+    "multiparty": "^4.2.2"
   },
   "tsDevKitConfig": {
     "target": "node",

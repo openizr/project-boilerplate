@@ -1,5 +1,5 @@
 /**
- * Copyright (c) KivFinance, Inc.
+ * Copyright (c) ...
  * All rights reserved.
  */
 
