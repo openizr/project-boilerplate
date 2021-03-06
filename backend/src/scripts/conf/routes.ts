@@ -4,6 +4,7 @@
  */
 
 import { FastifyInstance } from 'fastify';
+import getHealth from 'scripts/routes/getHealth';
 import v1GetMessage from 'scripts/routes/v1/getMessage';
 import v1PostMessage from 'scripts/routes/v1/postMessage';
 
@@ -20,4 +21,9 @@ export default (server: FastifyInstance): void => {
     app.post('/message', v1PostMessage);
     done();
   }, { prefix: '/api/v1' });
+
+  /**
+   * Health check endpoint.
+   */
+  server.get('/health', getHealth);
 };
