@@ -3,7 +3,7 @@ version: "3.6"
 services:
   backend:
     container_name: ${PROJECT_NAME}_backend
-    image: openizer/node:1.0.1-dev
+    image: openizer/node:1.0.2-dev
     env_file:
       - .env
     ports:
@@ -14,7 +14,7 @@ services:
     restart: on-failure
   frontend:
     container_name: ${PROJECT_NAME}_frontend
-    image: openizer/node:1.0.1-dev
+    image: openizer/node:1.0.2-dev
     env_file:
       - .env
     ports:
