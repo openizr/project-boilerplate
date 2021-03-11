@@ -1,27 +1,26 @@
 version: "3.6"
 
 services:
-  backend:
-    container_name: ${PROJECT_NAME}_backend
+  library:
+    container_name: ${PROJECT_NAME}_library
     image: openizer/node:1.0.2-dev
     env_file:
       - .env
-    ports:
-      - "127.0.0.1:${BACKEND_PORT}:${BACKEND_PORT}"
     command: sh -c "yarn install && yarn run dev"
     volumes:
-      - ./backend:/var/www/html
+      - ./library:/var/www/html
     restart: on-failure
-  frontend:
-    container_name: ${PROJECT_NAME}_frontend
+  playground:
+    container_name: ${PROJECT_NAME}_playground
     image: openizer/node:1.0.2-dev
     env_file:
       - .env
     ports:
-      - "127.0.0.1:${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "127.0.0.1:${PLAYGROUND_PORT}:${PLAYGROUND_PORT}"
     command: sh -c "yarn install && yarn run dev"
     volumes:
-      - ./frontend:/var/www/html
+      - ./library/src/library:/var/www/html/src/library
+      - ./playground:/var/www/html
 networks:
   default:
     driver: bridge

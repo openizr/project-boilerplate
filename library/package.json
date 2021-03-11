@@ -1,5 +1,5 @@
 {
-  "name": "APP_NAME-frontend",
+  "name": "APP_NAME-library",
   "version": "VERSION",
   "description": "APP_DESCRIPTION",
   "repository": "GIT REPOSITORY",
@@ -22,40 +22,20 @@
       "./node_modules/typescript-dev-kit/main.js"
     ]
   },
-  "dependencies": {
-    "@types/prop-types": "^15.7.3",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "axios": "^0.21.0",
-    "basx": "^1.0.0",
-    "diox": "^2.0.1",
-    "localforage": "^1.9.0",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  },
+  "dependencies": {},
   "tsDevKitConfig": {
-    "target": "web",
+    "target": "node",
     "entry": {
-      "main": "./scripts/main.tsx"
+      "main": "./library/main.ts"
     },
-    "devServer": {
-      "ip": "0.0.0.0",
-      "port": 5000
-    },
-    "splitChunks": true,
+    "runInDev": false,
+    "splitChunks": false,
     "srcPath": "src",
-    "distPath": "public",
+    "distPath": "dist",
     "banner": "/*!\n * Copyright (c) ...\n * All rights reserved.\n */",
     "env": {
-      "development": {
-        "NODE_ENV": "\"development\"",
-        "API_URL": "\"http://localhost:9000/api\""
-      },
-      "production": {
-        "NODE_ENV": "\"production\"",
-        "API_URL": "\"/api\""
-      }
+      "development": {},
+      "production": {}
     }
   },
   "scripts": {
