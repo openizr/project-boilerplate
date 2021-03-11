@@ -43,7 +43,6 @@ At the root of the repository:
 1. `cp .env.example` `.env`
 2. Complete your `.env` file with missing values
 3. `docker-compose up` (this might take a little while to start-up on the first time)
-4. `docker exec -it [PROJECT_NAME]_database /src/init.sh`
 
 You can then navigate through the UI in your browser (`http://localhost:[FRONTEND_PORT])`), or
 call the back-end API (`http://localhost:[BACKEND_PORT])`)
