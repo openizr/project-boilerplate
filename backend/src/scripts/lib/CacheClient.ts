@@ -1,8 +1,3 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
 import * as fs from 'fs-extra';
 
 const cachePath = '/var/www/html/node_modules/.cache';

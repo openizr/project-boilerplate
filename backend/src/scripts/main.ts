@@ -1,10 +1,6 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
 import fastify from 'fastify';
 import ajvErrors from 'ajv-errors';
+import 'source-map-support/register';
 import configuration from 'scripts/conf/app';
 import declareRoutes from 'scripts/conf/routes';
 import handleError from 'scripts/helpers/handleError';
@@ -37,6 +33,12 @@ if (configuration.mode === 'development') {
   });
 }
 
+// Logs requests timeouts.
+app.addHook('onTimeout', (request, _response, done) => {
+  app.log.error(`Error: request "${request.method} ${request.url}" timed out.`);
+  done();
+});
+
 // Catch-all for unsupported content types. Prevents fastify from throwing HTTP 500 when dealing
 // with unknown payloads. See https://www.fastify.io/docs/latest/ContentTypeParser/.
 app.addContentTypeParser('*', (_request, payload, next) => {
@@ -55,7 +57,7 @@ declareRoutes(app);
 // Starting server...
 app.listen(configuration.port, '0.0.0.0', (error) => {
   if (error) {
-    app.log.fatal(error.stack as string);
+    app.log.fatal(error);
     process.exit(1);
   }
 });

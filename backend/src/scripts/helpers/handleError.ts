@@ -1,8 +1,4 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
+import configuration from 'scripts/conf/app';
 import { FastifyError, FastifyRequest, FastifyReply } from 'fastify';
 import {
   Forbidden,
@@ -61,7 +57,12 @@ export default function handleError(
     statusCode = 400;
     message = 'Invalid JSON payload';
   } else if (statusCode === 500) {
-    request.log.error(error.stack as string);
+    // In development mode, it is more convenient to get a clean, formatted trace of errors.
+    if (configuration.mode === 'development') {
+      console.error(error.stack); // eslint-disable-line no-console
+    } else {
+      request.log.error(error.stack as string);
+    }
   } else {
     message = (error.validation !== undefined) ? error.validation[0].message : error.message;
   }

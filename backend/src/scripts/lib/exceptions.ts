@@ -1,11 +1,6 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
-/* eslint-disable max-classes-per-file */
 /** Contains standard HTTP exceptions. */
 
+/* eslint-disable max-classes-per-file */
 export class Forbidden extends Error { }
 export class BadRequest extends Error { }
 export class NotAcceptable extends Error { }

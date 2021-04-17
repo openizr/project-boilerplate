@@ -1,8 +1,3 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
 import { FastifyInstance } from 'fastify';
 import getHealth from 'scripts/routes/getHealth';
 import v1GetMessage from 'scripts/routes/v1/getMessage';

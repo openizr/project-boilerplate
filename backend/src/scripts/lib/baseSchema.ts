@@ -1,9 +1,4 @@
 /**
- * Copyright (c) ...
- * All rights reserved.
- */
-
-/**
  * Fastify validation and serialization schema used as a basis for every endpoint.
  */
 export default {

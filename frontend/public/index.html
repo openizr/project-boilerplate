@@ -2,20 +2,47 @@
 <html lang="en">
 
 <head>
+  <base href="/" />
   <meta charset="UTF-8">
-  <title>Project boilerplate</title>
-  <meta name="description"
-    content="Backend/frontend project boilerplate, to start a new Typescript project as fast as a rocket">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-  <base href="/" />
-  <script async src="./assets/scripts/runtime.1ac555760251d29697f5.js"></script>
-  <script async src="./assets/scripts/vendor.d788f3e3739db8f46f6d.js"></script>
-  <script async src="./assets/scripts/main.85fcb79adc73401aea6f.js"></script>
-  <link rel="stylesheet" href="./assets/styles/main.85fcb79adc73401aea6f.css">
-  <!-- <script async src="./assets/scripts/runtime.js"></script>
-  <script async src="./assets/scripts/vendor.js"></script>
-  <script async src="./assets/scripts/main.js"></script> -->
+  <!-- SEO metadata. -->
+  <title>Project boilerplate</title>
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Project boilerplate" />
+  <meta property="og:url" content="http://localhost:5000/" />
+  <meta property="og:site_name" content="Project boilerplate website" />
+  <meta property="og:image" content="http://localhost:5000/assets/test.jpg" />
+  <meta property="og:description" content="Backend/frontend project boilerplate" />
+  <meta name="description" content="Backend/frontend project boilerplate">
+
+  <!-- Structured data (SEO). -->
+  <script type="application/ld+json">
+    {}
+  </script>
+
+  <!-- Minimal favicon declaration to support all major browsers and devices. -->
+  <meta name="theme-color" content="#FFFFFF" />
+  <link rel="manifest" href="/static/manifest.json" />
+  <link rel="msapplication-config" href="/static/browserconfig.xml" />
+  <link rel="icon" sizes="16x16" href="/static/images/favicons/favicon-16x16.png" />
+  <link rel="icon" sizes="32x32" href="/static/images/favicons/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicons/apple-icon-180x180.png" />
+
+  <!-- Content-Security Policy. -->
+  <meta httpEquiv="Content-Security-Policy"
+    content="default-src 'self' data: 'nonce-test' http://localhost:5000; style-src 'self' data: 'unsafe-inline'; block-all-mixed-content; upgrade-insecure-requests;" />
+
+  <!-- Development assets. -->
+  <script async src="./assets/scripts/main.js"></script>
+
+  <!-- Production assets. -->
+  <!-- <script async src="./assets/scripts/runtime.b80118ad6f96fa371c3e.js"></script>
+  <script async src="./assets/scripts/vendor.8d324499ab9389c2fb99.js"></script>
+  <script async src="./assets/scripts/main.3283d7fa9029845fc408.js"></script>
+  <link rel="stylesheet" href="./assets/styles/main.3283d7fa9029845fc408.css"> -->
+
 </head>
 
 <body>

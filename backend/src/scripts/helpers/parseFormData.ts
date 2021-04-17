@@ -1,14 +1,9 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
 import os from 'os';
 import path from 'path';
 import fs from 'fs-extra';
+import { generateId } from 'basx';
 import multiparty from 'multiparty';
 import { IncomingMessage as Payload } from 'http';
-import generateId from 'scripts/helpers/generateId';
 import { BadRequest, RequestEntityTooLarge, UnprocessableEntity } from 'scripts/lib/exceptions';
 
 interface Fields {

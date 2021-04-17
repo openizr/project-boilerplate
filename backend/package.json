@@ -13,12 +13,12 @@
       "homepage": "https://github.com/AUTHOR_USERNAME"
     }
   ],
-  "license": "LICENSE",
+  "license": "MIT",
   "devDependencies": {
     "@types/ajv-errors": "^1.0.3",
-    "@types/multiparty": "^0.0.32",
     "@types/fs-extra": "^9.0.6",
-    "typescript-dev-kit": "^2.3.3"
+    "@types/multiparty": "^0.0.32",
+    "typescript-dev-kit": "^3.0.3"
   },
   "eslintConfig": {
     "extends": [
@@ -30,7 +30,8 @@
     "basx": "^1.0.0",
     "fastify": "^3.9.2",
     "fs-extra": "^9.1.0",
-    "multiparty": "^4.2.2"
+    "multiparty": "^4.2.2",
+    "source-map-support": "^0.5.19"
   },
   "tsDevKitConfig": {
     "target": "node",
@@ -38,7 +39,6 @@
       "main": "./scripts/main.ts"
     },
     "runInDev": true,
-    "splitChunks": true,
     "srcPath": "src",
     "distPath": "dist",
     "banner": "/*!\n * Copyright (c) ...\n * All rights reserved.\n */",
@@ -52,6 +52,7 @@
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
-    "doc": "node_modules/.bin/typedoc --out ./doc/ src/ --exclude \"**/__+(tests|mocks)__/**\""
+    "doc": "node_modules/.bin/typedoc --out ./doc/ --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/",
+    "postinstall": "rm -f node_modules/.eslintcache"
   }
 }

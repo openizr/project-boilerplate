@@ -3,25 +3,28 @@ version: "3.6"
 services:
   backend:
     container_name: ${PROJECT_NAME}_backend
-    image: openizer/node:1.0.2-dev
+    image: openizr/node:2.0.0-dev
     env_file:
       - .env
     ports:
       - "127.0.0.1:${BACKEND_PORT}:${BACKEND_PORT}"
-    command: sh -c "yarn install && yarn run dev"
+    command: sh -c "yarn && yarn run dev"
     volumes:
       - ./backend:/var/www/html
-    restart: on-failure
+    restart: unless-stopped
   frontend:
     container_name: ${PROJECT_NAME}_frontend
-    image: openizer/node:1.0.2-dev
+    image: openizr/node:2.0.0-dev
     env_file:
       - .env
     ports:
       - "127.0.0.1:${FRONTEND_PORT}:${FRONTEND_PORT}"
-    command: sh -c "yarn install && yarn run dev"
+    command: sh -c "yarn && yarn run dev"
     volumes:
       - ./frontend:/var/www/html
+    restart: unless-stopped
+
+# For people that use a VPN
 networks:
   default:
     driver: bridge

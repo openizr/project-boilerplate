@@ -1,8 +1,9 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
+/* istanbul ignore file */
+
+interface Routes {
+  [path: string]: () => Promise<unknown>;
+}
 
 export default {
   '/': () => import('scripts/pages/Home'),
-} as Record<string, unknown>;
+} as Routes;

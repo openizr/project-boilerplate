@@ -1,13 +1,16 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
+/* istanbul ignore file */
 
 import 'styles/main.scss';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { store } from 'scripts/store';
 import Router from 'scripts/containers/Router';
+
+if (process.env.NODE_ENV === 'production') {
+  console.log('PRODUCTION MODE'); // eslint-disable-line no-console
+}
+if (process.env.NODE_ENV === 'development') {
+  console.log('DEVELOPMENT MODE'); // eslint-disable-line no-console
+}
 
 // Webpack HMR interface.
 interface ExtendedNodeModule extends NodeModule {
@@ -15,11 +18,13 @@ interface ExtendedNodeModule extends NodeModule {
 }
 
 function main(): void {
-  store.subscribe('router', (newState) => {
-    console.log('New route!', newState); // eslint-disable-line no-console
-  });
   import('scripts/locale/en.json').then((locale) => {
-    ReactDOM.render(<Router locale={locale.default} />, document.querySelector('#root'));
+    ReactDOM.render(
+      <React.StrictMode>
+        <Router locale={locale.default} />
+      </React.StrictMode>,
+      document.querySelector('#root'),
+    );
   });
 }
 

@@ -1,17 +1,16 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
 import { i18n } from 'basx';
+import store from 'scripts/store';
 import React, { Suspense } from 'react';
-import { store } from 'scripts/store';
 import routes from 'scripts/store/routes';
 import useStore from 'diox/connectors/react';
+import Loader from 'scripts/components/Loader';
 import PropTypes, { InferProps } from 'prop-types';
-import ErrorBoundary from 'scripts/components/ErrorBoundary';
 
-type LazyComponent = () => Promise<{ default: React.ComponentType<{ translate: () => string }> }>;
+type LazyComponent = () => Promise<{
+  default: React.ComponentType<{
+    translate: (label: string, values: Record<string, string>) => string
+  }>
+}>;
 
 const [useCombiner] = useStore(store);
 
@@ -23,9 +22,8 @@ const propTypes = {
  * App router.
  */
 export default function Router(props: InferProps<typeof propTypes>): JSX.Element {
-  const [routing] = useCombiner('router', (newState) => newState);
   const { locale } = props;
-  const { route } = routing;
+  const [route] = useCombiner('router', (newState) => newState.route);
 
   let currentPage = null;
   if (routes[route] !== undefined) {
@@ -34,13 +32,9 @@ export default function Router(props: InferProps<typeof propTypes>): JSX.Element
   }
 
   return (
-    <section>
-      <ErrorBoundary>
-        <Suspense fallback={<div>LOADING...</div>}>
-          {currentPage}
-        </Suspense>
-      </ErrorBoundary>
-    </section>
+    <Suspense fallback={<Loader />}>
+      {currentPage}
+    </Suspense>
   );
 }
 

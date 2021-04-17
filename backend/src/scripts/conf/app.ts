@@ -1,9 +1,4 @@
 /**
- * Copyright (c) ...
- * All rights reserved.
- */
-
-/**
  * App configuration.
  */
 export default {

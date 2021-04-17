@@ -1,8 +1,3 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
 import { FastifyRequest, FastifyReply } from 'fastify';
 
 /**
