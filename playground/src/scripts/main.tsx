@@ -1,10 +1,4 @@
-/**
- * Copyright (c) ...
- * All rights reserved.
- */
-
-import 'styles/main.scss';
-import sum from 'library/main';
+import sum from 'library';
 
 // Webpack HMR interface.
 interface ExtendedNodeModule extends NodeModule {
@@ -12,7 +6,7 @@ interface ExtendedNodeModule extends NodeModule {
 }
 
 function main(): void {
-  alert(sum(1, 2, 3, 4)); // eslint-disable-line no-alert
+  console.log(sum(1, 2, 3, 4, 5)); // eslint-disable-line no-console
 }
 
 // Ensures DOM is fully loaded before running app's main logic.

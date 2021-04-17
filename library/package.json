@@ -1,10 +1,11 @@
 {
-  "name": "APP_NAME-library",
-  "version": "VERSION",
+  "name": "library",
+  "version": "0.0.1",
   "description": "APP_DESCRIPTION",
   "repository": "GIT REPOSITORY",
   "bugs": "GIT BUGS PAGE",
   "main": "./main.js",
+  "types": "./types.d.ts",
   "keywords": [],
   "contributors": [
     {
@@ -13,9 +14,9 @@
       "homepage": "https://github.com/AUTHOR_USERNAME"
     }
   ],
-  "license": "LICENSE",
+  "license": "MIT",
   "devDependencies": {
-    "typescript-dev-kit": "^2.3.3"
+    "typescript-dev-kit": "^3.0.4"
   },
   "eslintConfig": {
     "extends": [
@@ -26,10 +27,9 @@
   "tsDevKitConfig": {
     "target": "node",
     "entry": {
-      "main": "./library/main.ts"
+      "main": "./scripts/main.ts"
     },
     "runInDev": false,
-    "splitChunks": false,
     "srcPath": "src",
     "distPath": "dist",
     "banner": "/*!\n * Copyright (c) ...\n * All rights reserved.\n */",
@@ -43,6 +43,7 @@
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
-    "doc": "node_modules/.bin/typedoc --out ./doc/ src/ --exclude \"**/__+(tests|mocks)__/**\""
+    "doc": "node_modules/.bin/typedoc --out ./doc/ --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/",
+    "postinstall": "rm -f node_modules/.eslintcache"
   }
 }
