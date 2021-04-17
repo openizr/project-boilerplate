@@ -15,6 +15,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@vue/test-utils": "^1.1.4",
     "typescript-dev-kit": "^3.0.3"
   },
   "eslintConfig": {
@@ -23,19 +24,14 @@
     ]
   },
   "dependencies": {
-    "@types/prop-types": "^15.7.3",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "basx": "^1.0.0",
+    "basx": "^1.3.1",
     "diox": "^3.0.1",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "vue": "^2.6.10"
   },
   "tsDevKitConfig": {
     "target": "web",
     "entry": {
-      "main": "./scripts/main.tsx"
+      "main": "./scripts/main.ts"
     },
     "devServer": {
       "ip": "0.0.0.0",

@@ -5,5 +5,5 @@ interface Routes {
 }
 
 export default {
-  '/': () => import('scripts/pages/Home'),
+  '/': () => import('scripts/pages/Home.vue'),
 } as Routes;
