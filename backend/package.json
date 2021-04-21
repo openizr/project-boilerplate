@@ -15,10 +15,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/ajv-errors": "^1.0.3",
     "@types/fs-extra": "^9.0.6",
     "@types/multiparty": "^0.0.32",
-    "typescript-dev-kit": "^3.0.3"
+    "typescript-dev-kit": "^3.0.4"
   },
   "eslintConfig": {
     "extends": [
@@ -26,9 +25,10 @@
     ]
   },
   "dependencies": {
-    "ajv-errors": "^1.0.1",
+    "ajv": "^8.1.0",
+    "ajv-errors": "^3.0.0",
     "basx": "^1.0.0",
-    "fastify": "^3.9.2",
+    "fastify": "^3.15.0",
     "fs-extra": "^9.1.0",
     "multiparty": "^4.2.2",
     "source-map-support": "^0.5.19"
