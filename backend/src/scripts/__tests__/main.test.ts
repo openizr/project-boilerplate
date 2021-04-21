@@ -1,8 +1,8 @@
 import * as fastify from 'fastify';
-import ajvErrors from 'ajv-errors';
 
 type Misc = any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
+jest.mock('ajv');
 jest.mock('fastify');
 jest.mock('ajv-errors');
 jest.spyOn(process, 'exit').mockImplementation((code: number | undefined) => code as unknown as never);
@@ -24,20 +24,15 @@ describe('main', () => {
       require('scripts/main');
       expect(mockedFastify.fastify).toHaveBeenCalledTimes(1);
       expect(mockedFastify.fastify).toHaveBeenCalledWith({
-        ajv: {
-          customOptions: {
-            allErrors: true,
-            jsonPointers: true,
-          },
-          plugins: [ajvErrors],
-        },
         connectionTimeout: 3000,
         ignoreTrailingSlash: true,
         keepAliveTimeout: 2000,
         logger: { level: 'info' },
       });
       expect(mockedFastify.register).toHaveBeenCalledTimes(1);
-      expect(mockedFastify.addHook).toHaveBeenCalledTimes(1);
+      expect(mockedFastify.addHook).toHaveBeenCalledTimes(2);
+      expect(mockedFastify.addHook).toHaveBeenCalledWith('onRequest', expect.any(Function));
+      expect(mockedFastify.addHook).toHaveBeenCalledWith('onTimeout', expect.any(Function));
       expect(mockedFastify.listen).toHaveBeenCalledTimes(1);
       expect(mockedFastify.listen).toHaveBeenCalledWith(9000, '0.0.0.0', expect.any(Function));
     });
@@ -50,20 +45,14 @@ describe('main', () => {
       require('scripts/main');
       expect(mockedFastify.fastify).toHaveBeenCalledTimes(1);
       expect(mockedFastify.fastify).toHaveBeenCalledWith({
-        ajv: {
-          customOptions: {
-            allErrors: true,
-            jsonPointers: true,
-          },
-          plugins: [ajvErrors],
-        },
         connectionTimeout: 3000,
         ignoreTrailingSlash: true,
         keepAliveTimeout: 2000,
         logger: { level: 'error' },
       });
       expect(mockedFastify.register).toHaveBeenCalledTimes(1);
-      expect(mockedFastify.addHook).not.toHaveBeenCalled();
+      expect(mockedFastify.addHook).toHaveBeenCalledTimes(1);
+      expect(mockedFastify.addHook).toHaveBeenCalledWith('onTimeout', expect.any(Function));
       expect(mockedFastify.listen).toHaveBeenCalledTimes(1);
       expect(mockedFastify.listen).toHaveBeenCalledWith(4000, '0.0.0.0', expect.any(Function));
     });
