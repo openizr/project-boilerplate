@@ -1,3 +1,6 @@
+declare module '*.jpg';
+declare module '*.svg';
+
 declare module '*.vue' {
   import Vue from 'vue';
 
