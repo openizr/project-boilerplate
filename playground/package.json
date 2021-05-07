@@ -15,7 +15,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "typescript-dev-kit": "^3.0.4"
+    "typescript-dev-kit": "^3.1.0"
   },
   "eslintConfig": {
     "extends": [
@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "library": "file:../../../../library/dist"
+    "library": "file:../../../library/dist"
   },
   "tsDevKitConfig": {
     "target": "web",
@@ -33,6 +33,12 @@
     "devServer": {
       "ip": "0.0.0.0",
       "port": 5000
+    },
+    "html": {
+      "template": "./html/index.html",
+      "entries": [
+        "main"
+      ]
     },
     "splitChunks": false,
     "srcPath": "src",
