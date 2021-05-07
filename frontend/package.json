@@ -15,7 +15,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "typescript-dev-kit": "^3.0.5"
+    "typescript-dev-kit": "^3.1.0"
   },
   "eslintConfig": {
     "extends": [
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@types/prop-types": "^15.7.3",
-    "@types/react": "^17.0.0",
+    "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.0",
     "basx": "^1.3.3",
     "diox": "^4.0.1",
@@ -40,6 +40,12 @@
     "devServer": {
       "ip": "0.0.0.0",
       "port": 5000
+    },
+    "html": {
+      "template": "./html/index.html",
+      "entries": [
+        "main"
+      ]
     },
     "splitChunks": true,
     "srcPath": "src",

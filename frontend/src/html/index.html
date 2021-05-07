@@ -34,15 +34,13 @@
   <meta httpEquiv="Content-Security-Policy"
     content="default-src 'self' data: 'nonce-test' http://localhost:5000; style-src 'self' data: 'unsafe-inline'; block-all-mixed-content; upgrade-insecure-requests;" />
 
-  <!-- Development assets. -->
-  <script async src="./assets/scripts/main.js"></script>
+  <% for (var filePath in htmlWebpackPlugin.files.js) { %>
+    <script async src="<%= htmlWebpackPlugin.files.js[filePath] %>"></script>
+  <% } %>
 
-  <!-- Production assets. -->
-  <!-- <script async src="./assets/scripts/runtime.b80118ad6f96fa371c3e.js"></script>
-  <script async src="./assets/scripts/vendor.8d324499ab9389c2fb99.js"></script>
-  <script async src="./assets/scripts/main.3283d7fa9029845fc408.js"></script>
-  <link rel="stylesheet" href="./assets/styles/main.3283d7fa9029845fc408.css"> -->
-
+  <style>
+    /*WEBPACK_CSS*/
+  </style>
 </head>
 
 <body>
