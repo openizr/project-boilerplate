@@ -16,7 +16,7 @@ services:
     env_file:
       - .env
     ports:
-      - "127.0.0.1:${PLAYGROUND_PORT}:${PLAYGROUND_PORT}"
+      - "${HOST_IP}:${PLAYGROUND_PORT}:${PLAYGROUND_PORT}"
     command: sh -c "dsync /library/dist/ node_modules/library/ & yarn && cp /library/src/scripts/types.d.ts node_modules/library/ && yarn run dev"
     volumes:
       - ./playground:/var/www/html
