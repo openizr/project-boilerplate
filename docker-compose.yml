@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - "127.0.0.1:${BACKEND_PORT}:${BACKEND_PORT}"
+      - "${HOST_IP}:${BACKEND_PORT}:${BACKEND_PORT}"
     command: sh -c "yarn && yarn run dev"
     volumes:
       - ./backend:/var/www/html
@@ -18,7 +18,7 @@ services:
     env_file:
       - .env
     ports:
-      - "127.0.0.1:${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "${HOST_IP}:${FRONTEND_PORT}:${FRONTEND_PORT}"
     command: sh -c "yarn && yarn run dev"
     volumes:
       - ./frontend:/var/www/html
