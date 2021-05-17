@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+import createSchema from 'scripts/helpers/createSchema';
 
 /**
  * `GET /health` endpoint handler.
@@ -8,11 +9,11 @@ export default {
     .then(() => {
       response.send();
     }),
-  schema: {
+  schema: createSchema({
     response: {
       200: {
         type: 'string',
       },
     },
-  },
+  }),
 };
