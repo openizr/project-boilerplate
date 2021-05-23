@@ -30,17 +30,13 @@
   <link rel="icon" sizes="32x32" href="/static/images/favicons/favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicons/apple-icon-180x180.png" />
 
-  <!-- Content-Security Policy. -->
-  <meta httpEquiv="Content-Security-Policy"
-    content="default-src 'self' data: 'nonce-test' http://localhost:5000; style-src 'self' data: 'unsafe-inline'; block-all-mixed-content; upgrade-insecure-requests;" />
-
   <% for (var filePath in htmlWebpackPlugin.files.js) { %>
     <script async src="<%= htmlWebpackPlugin.files.js[filePath] %>"></script>
-  <% } %>
+    <% } %>
 
-  <style>
-    /*WEBPACK_CSS*/
-  </style>
+      <style>
+        /*WEBPACK_CSS*/
+      </style>
 </head>
 
 <body>
