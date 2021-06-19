@@ -8,7 +8,12 @@ import handleError from 'scripts/helpers/handleError';
 import handleNotFound from 'scripts/helpers/handleNotFound';
 
 // Initializing validator compiler...
-const ajv = new Ajv({ allErrors: true, removeAdditional: true, coerceTypes: true });
+const ajv = new Ajv({
+  allErrors: true,
+  removeAdditional: true,
+  useDefaults: true,
+  coerceTypes: true,
+});
 ajvErrors(ajv);
 
 // Initializing fastify server...

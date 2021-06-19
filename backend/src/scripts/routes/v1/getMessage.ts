@@ -9,7 +9,6 @@ export default {
     response.send({ message: 'WELCOME_MESSAGE' });
   },
   schema: createSchema({
-    body: undefined,
     response: {
       200: {
         type: 'object',

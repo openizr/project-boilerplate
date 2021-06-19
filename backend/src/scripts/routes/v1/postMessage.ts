@@ -13,7 +13,6 @@ export default {
   },
   schema: createSchema({
     body: {
-      type: 'object',
       required: ['message'],
       properties: {
         message: {
@@ -22,10 +21,10 @@ export default {
       },
       errorMessage: {
         properties: {
-          message: 'Body.message must be a string',
+          message: 'Body.message must be a string.',
         },
         required: {
-          message: 'Body.message is required',
+          message: 'Body.message is required.',
         },
       },
     },

@@ -1,3 +1,4 @@
+import 'scripts/conf/services';
 import * as fastify from 'fastify';
 
 type Misc = any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -35,6 +36,32 @@ describe('main', () => {
       expect(mockedFastify.addHook).toHaveBeenCalledWith('onTimeout', expect.any(Function));
       expect(mockedFastify.listen).toHaveBeenCalledTimes(1);
       expect(mockedFastify.listen).toHaveBeenCalledWith(9000, '0.0.0.0', expect.any(Function));
+    });
+  });
+
+  test('correctly initializes server - development mode 2', () => {
+    process.env.FASTIFY_REQUEST_TYPE = 'GET';
+    process.env.FASTIFY_CONTENT_TYPE = 'application/json';
+    delete process.env.BACKEND_PORT;
+    process.env.ENV = 'development';
+    jest.isolateModules(() => {
+      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+      require('scripts/main');
+      expect(mockedFastify.fastify).toHaveBeenCalledTimes(1);
+      expect(mockedFastify.fastify).toHaveBeenCalledWith({
+        connectionTimeout: 3000,
+        ignoreTrailingSlash: true,
+        keepAliveTimeout: 2000,
+        logger: { level: 'info' },
+      });
+      expect(mockedFastify.register).toHaveBeenCalledTimes(1);
+      expect(mockedFastify.addHook).toHaveBeenCalledTimes(2);
+      expect(mockedFastify.addHook).toHaveBeenCalledWith('onRequest', expect.any(Function));
+      expect(mockedFastify.addHook).toHaveBeenCalledWith('onTimeout', expect.any(Function));
+      expect(mockedFastify.listen).toHaveBeenCalledTimes(1);
+      expect(mockedFastify.listen).toHaveBeenCalledWith(9000, '0.0.0.0', expect.any(Function));
+      delete process.env.FASTIFY_REQUEST_TYPE;
+      delete process.env.FASTIFY_CONTENT_TYPE;
     });
   });
 
