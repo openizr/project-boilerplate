@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`helpers/createSchema with body 1`] = `
+Object {
+  "body": Object {
+    "additionalProperties": false,
+    "errorMessage": Object {
+      "type": "Request body should be a valid object.",
+    },
+    "required": Array [
+      "test",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`helpers/createSchema with params 1`] = `
+Object {
+  "params": Object {
+    "additionalProperties": false,
+    "errorMessage": Object {
+      "type": "Request params should be a valid object.",
+    },
+    "required": Array [
+      "test",
+    ],
+    "type": "object",
+  },
+}
+`;
+
+exports[`helpers/createSchema with query 1`] = `
+Object {
+  "query": Object {
+    "additionalProperties": false,
+    "errorMessage": Object {
+      "type": "Request query should be a valid object.",
+    },
+    "required": Array [
+      "test",
+    ],
+    "type": "object",
+  },
+}
+`;

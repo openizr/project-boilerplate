@@ -1,4 +1,4 @@
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 
 const cachePath = '/var/www/html/node_modules/.cache';
 

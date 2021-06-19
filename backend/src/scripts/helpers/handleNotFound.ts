@@ -12,5 +12,5 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 export default function handleNotFound(_request: FastifyRequest, response: FastifyReply): void {
   response
     .status(404)
-    .send({ error: { code: 404, message: 'Not Found' } });
+    .send({ error: { code: 'not_found', message: 'Not Found.' } });
 }

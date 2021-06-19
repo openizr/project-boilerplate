@@ -1,5 +1,3 @@
-import configuration from 'scripts/conf/app';
-import { FastifyError, FastifyRequest, FastifyReply } from 'fastify';
 import {
   Forbidden,
   BadRequest,
@@ -9,7 +7,9 @@ import {
   TooManyRequests,
   UnprocessableEntity,
   Unauthorized,
-} from 'scripts/lib/exceptions';
+} from 'scripts/lib/errors';
+import configuration from 'scripts/conf/app';
+import { FastifyError, FastifyRequest, FastifyReply } from 'fastify';
 
 /**
  * Handles thrown errors and formats a clean HTTP response.
@@ -27,7 +27,8 @@ export default function handleError(
   request: FastifyRequest,
   response: FastifyReply,
 ): void {
-  let message = 'Internal Server Error';
+  let message = 'Internal Server Error.';
+  let errorCode = 'internal_server_error';
   let statusCode = 500;
 
   if (error instanceof BadRequest) {
@@ -55,7 +56,8 @@ export default function handleError(
   // Only HTTP 500 errors must be logged, and reason should not be displayed to end user.
   if (error.statusCode === 400) {
     statusCode = 400;
-    message = 'Invalid JSON payload';
+    errorCode = 'invalid_payload';
+    message = 'Invalid JSON payload.';
   } else if (statusCode === 500) {
     // In development mode, it is more convenient to get a clean, formatted trace of errors.
     if (configuration.mode === 'development') {
@@ -64,10 +66,11 @@ export default function handleError(
       request.log.error(error.stack as string);
     }
   } else {
+    errorCode = (error.validation !== undefined) ? 'invalid_payload' : error.code;
     message = (error.validation !== undefined) ? error.validation[0].message : error.message;
   }
 
   response
     .status(statusCode)
-    .send({ error: { code: statusCode, message } });
+    .send({ error: { code: errorCode, message } });
 }

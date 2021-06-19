@@ -4,19 +4,30 @@ import fs from 'fs-extra';
 import { generateId } from 'basx';
 import multiparty from 'multiparty';
 import { IncomingMessage as Payload } from 'http';
-import { BadRequest, RequestEntityTooLarge, UnprocessableEntity } from 'scripts/lib/exceptions';
+import { BadRequest, RequestEntityTooLarge, UnprocessableEntity } from 'scripts/lib/errors';
 
-interface Fields {
-  [name: string]: {
-    id: string;
-    size: number;
-    type: string;
-    path: string;
-    name: string;
-  }[];
+/**
+ * Uploaded file.
+ */
+export interface File {
+  id: string;
+  size: number;
+  type: string;
+  path: string;
+  name: string;
 }
 
-interface Options {
+/**
+ * Parsed multipart/form-data fields.
+ */
+export interface Fields {
+  [name: string]: string | File[];
+}
+
+/**
+ * Multipart/form-data parser options.
+ */
+export interface Options {
   maxFields?: number;
   maxFileSize?: number;
   maxTotalSize?: number;
@@ -36,7 +47,7 @@ interface Options {
  *  maxFileSize: 2000000,
  * }`
  *
- * @returns {Promise<File[]>} A new Promise for asynchronous handling.
+ * @returns {Promise<Fields>} Parsed form fields.
  */
 export default function parseFormData(payload: Payload, options: Options = {}): Promise<Fields> {
   let totalSize = 0;
@@ -55,16 +66,18 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
     parser.on('close', () => resolve(fields));
 
     // Non-file fields parsing logic.
-    parser.on('field', () => null);
+    parser.on('field', (name, value) => {
+      fields[name] = value;
+    });
 
     // Global payload errors handling.
     parser.on('error', (error) => {
       if (/maxFieldsSize/i.test(error.message)) {
-        reject(new RequestEntityTooLarge('Maximum non-file fields size exceeded'));
+        reject(new RequestEntityTooLarge('field_too_large', 'Maximum non-file fields size exceeded.'));
       } else if (/maxFields/i.test(error.message)) {
-        reject(new RequestEntityTooLarge('Maximum number of fields exceeded'));
+        reject(new RequestEntityTooLarge('too_many_fields', 'Maximum number of fields exceeded.'));
       } else if (/missing content-type header/i.test(error.message)) {
-        reject(new UnprocessableEntity('Missing "Content-Type" header'));
+        reject(new UnprocessableEntity('missing_content_type_header', 'Missing "Content-Type" header.'));
       } else {
         reject(error);
       }
@@ -74,7 +87,7 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
     parser.on('part', (part) => {
       part.on('error', reject);
       if (allowedMimeTypes.includes(part.headers['content-type']) === false) {
-        reject(new BadRequest(`Invalid file type "${part.headers['content-type']}" for file "${part.filename}"`));
+        reject(new BadRequest('invalid_file_type', `Invalid file type "${part.headers['content-type']}" for file "${part.filename}".`));
       } else {
         const fileIndex = totalFiles;
         totalFiles += 1;
@@ -82,7 +95,7 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
         const filePath = path.join(os.tmpdir(), fileId);
         const fileStream = fs.createWriteStream(filePath);
         fields[part.name] = fields[part.name] || [];
-        fields[part.name].push({
+        (fields[part.name] as File[]).push({
           size: 0,
           id: fileId,
           path: filePath,
@@ -92,12 +105,12 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
         part.on('data', (stream: Buffer) => {
           const size = stream.length;
           totalSize += size;
-          fields[part.name][fileIndex].size += size;
+          (fields[part.name] as File[])[fileIndex].size += size;
           if (totalSize > maxTotalSize) {
-            reject(new RequestEntityTooLarge('Maximum total files size exceeded'));
+            reject(new RequestEntityTooLarge('files_too_large', 'Maximum total files size exceeded.'));
           }
-          if (fields[part.name][fileIndex].size > maxFileSize) {
-            reject(new RequestEntityTooLarge(`Maximum size exceeded for file "${part.filename}"`));
+          if ((fields[part.name] as File[])[fileIndex].size > maxFileSize) {
+            reject(new RequestEntityTooLarge('file_too_large', `Maximum size exceeded for file "${part.filename}".`));
           }
           fileStream.write(stream);
         });

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes/getHealth correctly handles request 1`] = `
+Object {
+  "response": Object {
+    "200": Object {
+      "type": "string",
+    },
+  },
+}
+`;

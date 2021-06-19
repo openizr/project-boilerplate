@@ -2,7 +2,6 @@
 
 exports[`routes/v1/getMessage correctly handles request 1`] = `
 Object {
-  "body": undefined,
   "response": Object {
     "200": Object {
       "properties": Object {
