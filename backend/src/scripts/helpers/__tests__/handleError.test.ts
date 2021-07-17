@@ -7,6 +7,7 @@ import {
   NotAcceptable,
   TooManyRequests,
   UnprocessableEntity,
+  RequestEntityTooLarge,
 } from 'scripts/lib/errors';
 import handleError from 'scripts/helpers/handleError';
 import { FastifyRequest, FastifyReply, FastifyError } from 'fastify';
@@ -76,6 +77,15 @@ describe('helpers/handleError', () => {
     expect(send).toHaveBeenCalledWith({ error: { code: 'gone', message: 'Gone.' } });
     expect(status).toHaveBeenCalledTimes(1);
     expect(status).toHaveBeenCalledWith(410);
+  });
+
+  test('HTTP 413', async () => {
+    const error = new RequestEntityTooLarge('too_large', 'Too large.') as FastifyError;
+    await handleError(error, request, response);
+    expect(send).toHaveBeenCalledTimes(1);
+    expect(send).toHaveBeenCalledWith({ error: { code: 'too_large', message: 'Too large.' } });
+    expect(status).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenCalledWith(413);
   });
 
   test('HTTP 422', async () => {
