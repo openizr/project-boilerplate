@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ErrorWrapper renders correctly - basic 1`] = `
+<div>
+  <div>
+    success
+  </div>
+</div>
+`;
+
+exports[`components/ErrorWrapper renders correctly - error, handler 1`] = `
+<div>
+  <div>
+    error
+  </div>
+</div>
+`;
+
+exports[`components/ErrorWrapper renders correctly - error, no handler 1`] = `
+<div>
+  <div>
+    error
+  </div>
+</div>
+`;

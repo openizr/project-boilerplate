@@ -4,6 +4,7 @@ import 'styles/main.scss';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Router from 'scripts/containers/Router';
+import ErrorWrapper from 'scripts/components/ErrorWrapper';
 
 if (process.env.NODE_ENV === 'production') {
   console.log('PRODUCTION MODE'); // eslint-disable-line no-console
@@ -21,7 +22,9 @@ function main(): void {
   import('scripts/locale/en.json').then((locale) => {
     ReactDOM.render(
       <React.StrictMode>
-        <Router locale={locale.default} />
+        <ErrorWrapper fallback={<div>Error.</div>}>
+          <Router locale={locale.default} />
+        </ErrorWrapper>
       </React.StrictMode>,
       document.querySelector('#root'),
     );
