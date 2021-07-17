@@ -58,7 +58,23 @@ describe('helpers/parseFormData', () => {
     await expect(() => parseFormData({} as unknown as Payload, options)).rejects.toEqual(error);
   });
 
-  test('handles file part', async () => {
+  test('handles error - stream error', async () => {
+    process.env.FS_ERROR_STREAM = 'true';
+    const options = { allowedMimeTypes: ['image/png'] };
+    const error = new Error('error');
+    await expect(() => parseFormData({} as unknown as Payload, options)).rejects.toEqual(error);
+    delete process.env.FS_ERROR_STREAM;
+  });
+
+  test('correctly parses data - 0 field', async () => {
+    process.env.MUTIPARTY_NO_FIELD = 'true';
+    const options = { allowedMimeTypes: ['image/png'] };
+    await parseFormData({} as unknown as Payload, options);
+    expect(fs.createWriteStream).toHaveBeenCalledTimes(0);
+    delete process.env.MUTIPARTY_NO_FIELD;
+  });
+
+  test('correctly parses data - 1 file', async () => {
     const options = { allowedMimeTypes: ['image/png'] };
     await parseFormData({} as unknown as Payload, options);
     expect(fs.createWriteStream).toHaveBeenCalledTimes(1);

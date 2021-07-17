@@ -1,12 +1,13 @@
 import {
-  Forbidden,
-  BadRequest,
-  NotAcceptable,
   Gone,
   NotFound,
+  Forbidden,
+  BadRequest,
+  Unauthorized,
+  NotAcceptable,
   TooManyRequests,
   UnprocessableEntity,
-  Unauthorized,
+  RequestEntityTooLarge,
 } from 'scripts/lib/errors';
 import configuration from 'scripts/conf/app';
 import { FastifyError, FastifyRequest, FastifyReply } from 'fastify';
@@ -45,6 +46,8 @@ export default function handleError(
     statusCode = 410;
   } else if (error instanceof UnprocessableEntity) {
     statusCode = 422;
+  } else if (error instanceof RequestEntityTooLarge) {
+    statusCode = 413;
   } else if (error instanceof TooManyRequests) {
     statusCode = 429;
   } else if (error.validation !== undefined) {

@@ -1,5 +1,3 @@
-import { Json } from 'basx';
-
 /**
  * Fastify validation and serialization schema used as a basis for endpoints.
  */
