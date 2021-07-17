@@ -24,19 +24,19 @@
 
   <!-- Minimal favicon declaration to support all major browsers and devices. -->
   <meta name="theme-color" content="#FFFFFF" />
-  <link rel="manifest" href="/static/manifest.json" />
-  <link rel="msapplication-config" href="/static/browserconfig.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="msapplication-config" href="/browserconfig.xml" />
   <link rel="icon" sizes="16x16" href="/static/images/favicons/favicon-16x16.png" />
   <link rel="icon" sizes="32x32" href="/static/images/favicons/favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicons/apple-icon-180x180.png" />
 
   <% for (var filePath in htmlWebpackPlugin.files.js) { %>
     <script async src="<%= htmlWebpackPlugin.files.js[filePath] %>"></script>
-    <% } %>
+  <% } %>
 
-      <style>
-        /*WEBPACK_CSS*/
-      </style>
+  <style>
+    /*WEBPACK_CSS*/
+  </style>
 </head>
 
 <body>
