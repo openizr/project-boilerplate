@@ -7,10 +7,10 @@ export default function createSchema(schema: Json): Json {
     finalSchema.body = {
       type: 'object',
       additionalProperties: false,
-      ...finalSchema.body,
+      ...schema.body,
       errorMessage: {
         type: 'Request body should be a valid object.',
-        ...finalSchema.body.errorMessage,
+        ...schema.body.errorMessage,
       },
     };
   }
@@ -18,10 +18,10 @@ export default function createSchema(schema: Json): Json {
     finalSchema.query = {
       type: 'object',
       additionalProperties: false,
-      ...finalSchema.query,
+      ...schema.query,
       errorMessage: {
         type: 'Request query should be a valid object.',
-        ...finalSchema.query.errorMessage,
+        ...schema.query.errorMessage,
       },
     };
   }
@@ -29,10 +29,10 @@ export default function createSchema(schema: Json): Json {
     finalSchema.params = {
       type: 'object',
       additionalProperties: false,
-      ...finalSchema.params,
+      ...schema.params,
       errorMessage: {
         type: 'Request params should be a valid object.',
-        ...finalSchema.params.errorMessage,
+        ...schema.params.errorMessage,
       },
     };
   }
