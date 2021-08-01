@@ -4,8 +4,8 @@ import ajvErrors from 'ajv-errors';
 import 'source-map-support/register';
 import configuration from 'scripts/conf/app';
 import declareRoutes from 'scripts/conf/routes';
-import handleError from 'scripts/helpers/handleError';
 import handleNotFound from 'scripts/helpers/handleNotFound';
+import createErrorHandler from 'scripts/helpers/createErrorHandler';
 
 // Initializing validator compiler...
 const ajv = new Ajv({
@@ -25,8 +25,8 @@ const app = fastify({
 });
 
 // Default errors handlers.
-app.setErrorHandler(handleError);
 app.setNotFoundHandler(handleNotFound);
+app.setErrorHandler(createErrorHandler(configuration.mode));
 
 // Handles CORS in development mode.
 if (configuration.mode === 'development') {
