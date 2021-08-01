@@ -1,16 +1,10 @@
-import { FastifyRequest, FastifyReply } from 'fastify';
+import { NotFound } from 'scripts/lib/errors';
 
 /**
- * Handles Not Found errors and formats a clean HTTP response.
- *
- * @param {FastifyRequest} request HTTP request.
- *
- * @param {FastifyReply} response HTTP response.
+ * Handles HTTP 404 errors.
  *
  * @returns {void}
  */
-export default function handleNotFound(_request: FastifyRequest, response: FastifyReply): void {
-  response
-    .status(404)
-    .send({ error: { code: 'not_found', message: 'Not Found.' } });
+export default function handleNotFound(): void {
+  throw new NotFound('not_found', 'Not Found.');
 }

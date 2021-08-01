@@ -57,13 +57,21 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
   const maxFileSize = options.maxFileSize || 2000000;
   return new Promise((resolve, reject) => {
     const fields: Fields = {};
+    let parserClosed = false;
+    let numberOfParts = 0;
+    let numberOfClosedParts = 0;
 
     const parser = new multiparty.Form({
       maxFields: options.maxFields,
       maxFieldsSize: options.maxFieldsSize,
     });
 
-    parser.on('close', () => resolve(fields));
+    parser.on('close', () => {
+      parserClosed = true;
+      if (numberOfParts === 0) {
+        resolve(fields);
+      }
+    });
 
     // Non-file fields parsing logic.
     parser.on('field', (name, value) => {
@@ -85,7 +93,7 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
 
     // Files parsing logic.
     parser.on('part', (part) => {
-      part.on('error', reject);
+      numberOfParts += 1;
       if (allowedMimeTypes.includes(part.headers['content-type']) === false) {
         reject(new BadRequest('invalid_file_type', `Invalid file type "${part.headers['content-type']}" for file "${part.filename}".`));
       } else {
@@ -94,22 +102,37 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
         const fileId = generateId();
         const filePath = path.join(os.tmpdir(), fileId);
         const fileStream = fs.createWriteStream(filePath);
+        const closeStream = (error: Error | null): void => {
+          fileStream.end();
+          if (error !== null && error !== undefined) {
+            reject(error);
+          }
+        };
+        fileStream.on('error', closeStream);
+        fileStream.on('close', () => {
+          numberOfClosedParts += 1;
+          if (parserClosed === true && numberOfClosedParts >= numberOfParts) {
+            resolve(fields);
+          }
+        });
         fields[part.name] = fields[part.name] || [];
-        (fields[part.name] as File[]).push({
+        (<File[]>fields[part.name]).push({
           size: 0,
           id: fileId,
           path: filePath,
           name: part.filename,
           type: part.headers['content-type'],
         });
-        part.on('data', (stream: Buffer) => {
+        part.on('error', closeStream);
+        part.on('close', closeStream);
+        part.on('data', (stream) => {
           const size = stream.length;
           totalSize += size;
-          (fields[part.name] as File[])[fileIndex].size += size;
+          (<File[]>fields[part.name])[fileIndex].size += size;
           if (totalSize > maxTotalSize) {
             reject(new RequestEntityTooLarge('files_too_large', 'Maximum total files size exceeded.'));
           }
-          if ((fields[part.name] as File[])[fileIndex].size > maxFileSize) {
+          if ((<File[]>fields[part.name])[fileIndex].size > maxFileSize) {
             reject(new RequestEntityTooLarge('file_too_large', `Maximum size exceeded for file "${part.filename}".`));
           }
           fileStream.write(stream);

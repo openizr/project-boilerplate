@@ -3,7 +3,7 @@
  */
 export default {
   // Mode (development | production).
-  mode: process.env.ENV,
+  mode: <string>process.env.ENV,
   // Server's port.
   port: parseInt(process.env.BACKEND_PORT || '9000', 10),
   // Logging options.

@@ -5,7 +5,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 
 let container = document.createElement('div');
 
-describe('react/Message', () => {
+describe('components/Message', () => {
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);

@@ -5,7 +5,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 
 let container = document.createElement('div');
 
-describe('react/Loader', () => {
+describe('components/Loader', () => {
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
