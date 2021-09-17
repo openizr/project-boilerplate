@@ -63,7 +63,7 @@
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build && cd ../../ && sed -i -e \"s%/\\*WEBPACK_CSS\\*/%WEBPACK_CSS\\n%g\" public/index.html  && sed -i -e \"/WEBPACK_CSS/r $(ls public/assets/styles/main.*.css)\" public/index.html && sed -i -e \"s/WEBPACK_CSS//g\" public/index.html",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
-    "doc": "node_modules/.bin/typedoc --out ./doc/ --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/",
+    "doc": "node_modules/.bin/typedoc --out ./doc/ --exclude \"**/__+(tests|mocks)__/**\" src/scripts/main.ts",
     "postinstall": "rm -f node_modules/.eslintcache"
   }
 }
