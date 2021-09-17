@@ -5,7 +5,7 @@
 /* eslint-disable class-methods-use-this, @typescript-eslint/no-explicit-any */
 
 class Form {
-  on(eventName: string, callback: (...args: any) => void): void {
+  on(eventName: string, callback: (...args: any[]) => void): void {
     if (process.env.MUTIPARTY_NO_FIELD === 'true') {
       callback();
     } else {
@@ -20,7 +20,7 @@ class Form {
           callback(new Error('other error'));
         } else if (eventName === 'part') {
           callback({
-            on: (partEventName: string, partCallback: (...args: any) => void): void => {
+            on: (partEventName: string, partCallback: (...args: any[]) => void): void => {
               if (partEventName === 'data') {
                 partCallback({ length: 100 });
               }

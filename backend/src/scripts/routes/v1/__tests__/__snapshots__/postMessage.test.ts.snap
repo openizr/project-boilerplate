@@ -11,7 +11,7 @@ Object {
       "required": Object {
         "message": "Body.message is required.",
       },
-      "type": "Request body should be a valid object.",
+      "type": "must be a valid object.",
     },
     "properties": Object {
       "message": Object {
