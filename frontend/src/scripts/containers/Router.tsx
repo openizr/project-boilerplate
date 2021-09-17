@@ -5,6 +5,7 @@ import routes from 'scripts/store/routes';
 import useStore from 'diox/connectors/react';
 import Loader from 'scripts/components/Loader';
 import PropTypes, { InferProps } from 'prop-types';
+import { RoutingContext } from 'diox/extensions/router';
 
 type LazyComponent = () => Promise<{
   default: React.ComponentType<{
@@ -23,7 +24,7 @@ const propTypes = {
  */
 export default function Router(props: InferProps<typeof propTypes>): JSX.Element {
   const { locale } = props;
-  const [route] = useCombiner('router', (newState) => newState.route);
+  const [route] = useCombiner('router', (newState: RoutingContext) => newState.route || '');
 
   let currentPage = null;
   if (routes[route] !== undefined) {

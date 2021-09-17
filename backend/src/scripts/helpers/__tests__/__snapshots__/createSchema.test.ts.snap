@@ -5,7 +5,7 @@ Object {
   "body": Object {
     "additionalProperties": false,
     "errorMessage": Object {
-      "type": "Request body should be a valid object.",
+      "type": "must be a valid object.",
     },
     "required": Array [
       "test",
@@ -20,7 +20,7 @@ Object {
   "params": Object {
     "additionalProperties": false,
     "errorMessage": Object {
-      "type": "Request params should be a valid object.",
+      "type": "must be a valid object.",
     },
     "required": Array [
       "test",
@@ -35,7 +35,7 @@ Object {
   "query": Object {
     "additionalProperties": false,
     "errorMessage": Object {
-      "type": "Request query should be a valid object.",
+      "type": "must be a valid object.",
     },
     "required": Array [
       "test",

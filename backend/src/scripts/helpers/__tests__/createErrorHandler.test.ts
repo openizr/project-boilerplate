@@ -16,12 +16,13 @@ import { FastifyRequest, FastifyReply, FastifyError } from 'fastify';
 describe('helpers/createErrorHandler', () => {
   let handleError = createErrorHandler('development');
   const send = jest.fn();
+  const logger = console;
+  logger.error = jest.fn();
   const logError = jest.fn();
-  const request = <FastifyRequest>({ log: { error: logError } } as unknown);
+  const consoleerror = logger.error;
   const status = jest.fn(() => ({ send }));
   const response = <FastifyReply>({ status } as unknown);
-  console.error = jest.fn(); // eslint-disable-line no-console
-  const consoleerror = console.error; // eslint-disable-line no-console
+  const request = <FastifyRequest>({ log: { error: logError } } as unknown);
 
   beforeEach(() => {
     jest.clearAllMocks();

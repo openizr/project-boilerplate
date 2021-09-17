@@ -70,7 +70,8 @@ export default function createErrorHandler(mode: string): ErrorHandler {
     } else if (statusCode === 500) {
       // In development mode, it is more convenient to get a clean, formatted trace of errors.
       if (mode === 'development') {
-        console.error(error.stack); // eslint-disable-line no-console
+        const logger = console;
+        logger.error(error.stack);
       } else {
         request.log.error(error.stack as string);
       }

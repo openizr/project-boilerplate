@@ -1,3 +1,5 @@
+/* eslint-disable react/static-property-placement */
+
 import * as React from 'react';
 import PropTypes, { InferProps } from 'prop-types';
 
@@ -9,17 +11,14 @@ type Props = InferProps<typeof ErrorWrapper.propTypes> & { onError: ErrorHandler
  * Handles uncaught errors and displays a generic UI.
  */
 export default class ErrorWrapper extends React.Component<Props, State> {
-  // eslint-disable-next-line react/static-property-placement
   static displayName = 'ErrorWrapper';
 
-  // eslint-disable-next-line react/static-property-placement
   static propTypes = {
     onError: PropTypes.func,
     fallback: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
   };
 
-  // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
     onError: null,
     fallback: null,

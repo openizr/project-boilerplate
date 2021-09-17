@@ -1,10 +1,15 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import ErrorWrapper from 'scripts/components/ErrorWrapper';
 import { render, unmountComponentAtNode } from 'react-dom';
 
 describe('components/ErrorWrapper', () => {
-  console.error = jest.fn(); // eslint-disable-line no-console
+  const logger = console;
+  logger.error = jest.fn();
   const { error } = console;
   let container = document.createElement('div');
 
@@ -65,7 +70,7 @@ describe('components/ErrorWrapper', () => {
     expect(error).toHaveBeenCalledTimes(2);
     expect(onError).toHaveBeenCalledTimes(1);
     expect(onError).toHaveBeenCalledWith(new Error(), {
-      componentStack: '\n    at ErrorComponent (/var/www/html/src/scripts/components/__tests__/ErrorWrapper.test.tsx:54:13)\n    at ErrorWrapper (/var/www/html/src/scripts/components/ErrorWrapper.tsx:34:5)',
+      componentStack: '\n    at ErrorComponent (/var/www/html/src/scripts/components/__tests__/ErrorWrapper.test.tsx:58:13)\n    at ErrorWrapper (/var/www/html/src/scripts/components/ErrorWrapper.tsx:33:5)',
     });
   });
 });

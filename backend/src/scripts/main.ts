@@ -5,7 +5,9 @@ import 'source-map-support/register';
 import configuration from 'scripts/conf/app';
 import declareRoutes from 'scripts/conf/routes';
 import handleNotFound from 'scripts/helpers/handleNotFound';
+import { FastifyValidationResult } from 'fastify/types/schema.d';
 import createErrorHandler from 'scripts/helpers/createErrorHandler';
+import createErrorFormatter from 'scripts/helpers/createErrorFormatter';
 
 // Initializing validator compiler...
 const ajv = new Ajv({
@@ -27,6 +29,7 @@ const app = fastify({
 // Default errors handlers.
 app.setNotFoundHandler(handleNotFound);
 app.setErrorHandler(createErrorHandler(configuration.mode));
+app.setSchemaErrorFormatter(createErrorFormatter());
 
 // Handles CORS in development mode.
 if (configuration.mode === 'development') {
@@ -44,8 +47,7 @@ if (configuration.mode === 'development') {
 
 // Applies custom validator compiler.
 app.setValidatorCompiler(({ schema }) => (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ajv.compile(schema) as any
+  <FastifyValidationResult>ajv.compile(schema)
 ));
 
 // Logs requests timeouts.

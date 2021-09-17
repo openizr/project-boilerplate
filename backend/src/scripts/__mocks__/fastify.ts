@@ -31,6 +31,7 @@ const fastify = jest.fn(() => ({
   log: { fatal: jest.fn(), error: jest.fn() },
   setErrorHandler: jest.fn(),
   setNotFoundHandler: jest.fn(),
+  setSchemaErrorFormatter: jest.fn(),
   addContentTypeParser: jest.fn((_type, callback) => callback({}, {
     headers: {
       'content-type': (process.env.FASTIFY_CONTENT_TYPE || 'multipart/form-data'),
