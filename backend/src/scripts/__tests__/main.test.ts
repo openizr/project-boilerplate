@@ -1,4 +1,6 @@
-import 'scripts/conf/services';
+/* eslint-disable global-require */
+
+import cacheClient from 'scripts/conf/services';
 import * as fastify from 'scripts/__mocks__/fastify';
 
 jest.spyOn(process, 'exit').mockImplementation((code: number | undefined) => code as unknown as never);
@@ -15,14 +17,23 @@ describe('main', () => {
     process.env.ENV = 'development';
     jest.isolateModules(() => {
       jest.doMock('fastify', () => fastify.fastify);
-      // eslint-disable-next-line global-require
       require('scripts/main');
+      expect(cacheClient).not.toBe(undefined);
       expect(fastify.fastify).toHaveBeenCalledTimes(1);
       expect(fastify.fastify).toHaveBeenCalledWith({
         connectionTimeout: 3000,
         ignoreTrailingSlash: true,
         keepAliveTimeout: 2000,
-        logger: { level: 'info' },
+        trustProxy: '127.0.0.1/32',
+        logger: {
+          level: 'info',
+          prettyPrint: {
+            colorize: true,
+            ignore: 'hostname,pid',
+            suppressFlushSyncWarning: true,
+            translateTime: 'HH:MM:ss',
+          },
+        },
       });
       expect(fastify.register).toHaveBeenCalledTimes(1);
       expect(fastify.addHook).toHaveBeenCalledTimes(2);
@@ -39,14 +50,22 @@ describe('main', () => {
     delete process.env.BACKEND_PORT;
     process.env.ENV = 'development';
     jest.isolateModules(() => {
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
       require('scripts/main');
       expect(fastify.fastify).toHaveBeenCalledTimes(1);
       expect(fastify.fastify).toHaveBeenCalledWith({
         connectionTimeout: 3000,
         ignoreTrailingSlash: true,
+        trustProxy: '127.0.0.1/32',
         keepAliveTimeout: 2000,
-        logger: { level: 'info' },
+        logger: {
+          level: 'info',
+          prettyPrint: {
+            colorize: true,
+            ignore: 'hostname,pid',
+            suppressFlushSyncWarning: true,
+            translateTime: 'HH:MM:ss',
+          },
+        },
       });
       expect(fastify.register).toHaveBeenCalledTimes(1);
       expect(fastify.addHook).toHaveBeenCalledTimes(2);
@@ -62,14 +81,14 @@ describe('main', () => {
   test('correctly initializes server - production mode', () => {
     process.env.ENV = 'production';
     jest.isolateModules(() => {
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
       require('scripts/main');
       expect(fastify.fastify).toHaveBeenCalledTimes(1);
       expect(fastify.fastify).toHaveBeenCalledWith({
         connectionTimeout: 3000,
         ignoreTrailingSlash: true,
+        trustProxy: '127.0.0.1/32',
         keepAliveTimeout: 2000,
-        logger: { level: 'error' },
+        logger: { level: 'error', prettyPrint: false },
       });
       expect(fastify.register).toHaveBeenCalledTimes(1);
       expect(fastify.addHook).toHaveBeenCalledTimes(1);

@@ -5,6 +5,7 @@
   "repository": "GIT REPOSITORY",
   "bugs": "GIT BUGS PAGE",
   "main": "./main.js",
+  "type": "module",
   "keywords": [],
   "contributors": [
     {
@@ -17,7 +18,8 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.12",
     "@types/multiparty": "^0.0.33",
-    "typescript-dev-kit": "^4.0.0"
+    "pino-pretty": "^7.5.3",
+    "typescript-dev-kit": "^5.0.6"
   },
   "eslintConfig": {
     "extends": [
@@ -25,17 +27,15 @@
     ]
   },
   "dependencies": {
-    "ajv": "^8.6.3",
+    "ajv": "^8.10.0",
     "ajv-errors": "^3.0.0",
-    "basx": "^1.3.7",
-    "fastify": "^3.21.3",
-    "fs-extra": "^10.0.0",
-    "multiparty": "^4.2.2",
-    "source-map-support": "^0.5.20"
+    "fastify": "^3.27.4",
+    "fs-extra": "^10.0.1",
+    "multiparty": "^4.2.3"
   },
   "tsDevKitConfig": {
     "target": "node",
-    "entry": {
+    "entries": {
       "main": "./scripts/main.ts"
     },
     "runInDev": true,
@@ -50,9 +50,10 @@
   "scripts": {
     "init": "node_modules/typescript-dev-kit/scripts/init.sh",
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
+    "check": "cd node_modules/typescript-dev-kit/ && node scripts/check",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
-    "doc": "node_modules/.bin/typedoc --out ./doc/ --exclude \"**/__+(tests|mocks)__/**\" src/scripts/main.ts",
+    "doc": "typedoc --out ./doc/ --exclude \"**/__+(tests|mocks)__/**\" src/scripts/main.ts",
     "postinstall": "rm -f node_modules/.eslintcache"
   }
 }

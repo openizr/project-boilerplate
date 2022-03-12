@@ -10,16 +10,12 @@ import {
   UnprocessableEntity,
   RequestEntityTooLarge,
 } from 'scripts/lib/errors';
-import createErrorHandler from 'scripts/helpers/createErrorHandler';
+import handleError from 'scripts/helpers/handleError';
 import { FastifyRequest, FastifyReply, FastifyError } from 'fastify';
 
-describe('helpers/createErrorHandler', () => {
-  let handleError = createErrorHandler('development');
+describe('helpers/handleError', () => {
   const send = jest.fn();
-  const logger = console;
-  logger.error = jest.fn();
   const logError = jest.fn();
-  const consoleerror = logger.error;
   const status = jest.fn(() => ({ send }));
   const response = <FastifyReply>({ status } as unknown);
   const request = <FastifyRequest>({ log: { error: logError } } as unknown);
@@ -106,25 +102,17 @@ describe('helpers/createErrorHandler', () => {
   });
 
   test('Validation error', async () => {
-    const error = <FastifyError>{ validation: [{ message: 'Validation error.' }] };
+    const error = <FastifyError>{ message: 'Body must be a valid JSON.', code: 'invalid_payload', validation: [{}] };
     await handleError(error, request, response);
-    expect(send).toHaveBeenCalledWith({ error: { code: 'invalid_payload', message: 'Validation error.' } });
+    expect(send).toHaveBeenCalledWith({ error: { code: 'invalid_payload', message: 'Body must be a valid JSON.' } });
     expect(status).toHaveBeenCalledWith(400);
   });
 
-  test('Syntax error', async () => {
-    const error = <FastifyError>(new SyntaxError('Syntax error.'));
+  test('HTTP 500', async () => {
+    const error = <FastifyError>(new Error());
     await handleError(error, request, response);
     expect(send).toHaveBeenCalledWith({ error: { code: 'internal_server_error', message: 'Internal Server Error.' } });
     expect(status).toHaveBeenCalledWith(500);
-    expect(consoleerror).toHaveBeenCalledWith(error.stack);
-  });
-
-  test('Internal error - production mode', async () => {
-    handleError = createErrorHandler('production');
-    const error = <FastifyError>(new SyntaxError('Syntax error.'));
-    await handleError(error, request, response);
-    expect(consoleerror).not.toHaveBeenCalled();
-    expect(logError).toHaveBeenCalledWith(error.stack);
+    expect(request.log.error).toHaveBeenCalledWith(error);
   });
 });

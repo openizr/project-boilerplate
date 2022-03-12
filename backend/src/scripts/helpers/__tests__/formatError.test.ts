@@ -1,18 +1,18 @@
-import createErrorFormatter from 'scripts/helpers/createErrorFormatter';
+import formatError from 'scripts/helpers/formatError';
 
-describe('helpers/createErrorFormatter', () => {
+describe('helpers/formatError', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   test('generates a correct BadRequest error - "required" keyword', () => {
-    expect(createErrorFormatter()([{
+    expect(formatError([{
       message: '',
       keyword: 'required',
       instancePath: '/test',
       params: { missingProperty: 'prop' },
     }], 'body')).toEqual(new Error('Request\'s body.test.prop is required.'));
-    expect(createErrorFormatter()([{
+    expect(formatError([{
       message: '',
       keyword: 'required',
       instancePath: '/test',
@@ -20,7 +20,7 @@ describe('helpers/createErrorFormatter', () => {
   });
 
   test('generates a correct BadRequest error - other keyword', () => {
-    expect(createErrorFormatter()([{
+    expect(formatError([{
       message: 'must be a valid prop.',
       instancePath: '/test/prop',
     }], 'body')).toEqual(new Error('Request\'s body.test.prop must be a valid prop.'));

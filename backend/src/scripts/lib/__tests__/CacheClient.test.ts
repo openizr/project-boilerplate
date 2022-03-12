@@ -7,6 +7,8 @@ Date.now = jest.fn(() => 1624108129052);
 describe('lib/CacheClient', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    delete process.env.FS_ERROR;
+    delete process.env.EXPIRATION;
   });
 
   test('set - with expiration', async () => {
@@ -34,9 +36,8 @@ describe('lib/CacheClient', () => {
 
   test('get - cache exists, fs error', async () => {
     process.env.FS_ERROR = 'true';
-    await expect(async () => CacheClient.get('test')).rejects.toEqual({ message: 'fs_error' });
+    await expect(async () => CacheClient.get('test')).rejects.toEqual(new Error('fs_error'));
     expect(fs.readFile).toHaveBeenCalledTimes(1);
-    delete process.env.FS_ERROR;
   });
 
   test('get - cache exists, no expiration', async () => {
@@ -44,7 +45,6 @@ describe('lib/CacheClient', () => {
     const data = await CacheClient.get('test');
     expect(fs.readFile).toHaveBeenCalledTimes(1);
     expect(data).toBe('{"data":"test"}');
-    delete process.env.EXPIRATION;
   });
 
   test('get - cache exists, data expired', async () => {
