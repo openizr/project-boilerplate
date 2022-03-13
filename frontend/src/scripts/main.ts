@@ -1,32 +1,25 @@
-/* istanbul ignore file */
-
 import 'styles/main.scss';
-import Vue, { VNode } from 'vue';
-import Router from 'scripts/containers/Router.vue';
+import i18n from 'basx/i18n';
+import { App, createApp } from 'vue';
+import AppRouter from 'scripts/containers/AppRouter.vue';
 
-if (process.env.NODE_ENV === 'production') {
-  console.log('PRODUCTION MODE'); // eslint-disable-line no-console
+let app: App;
+const { log } = console;
+
+if (process.env.ENV === 'production') {
+  log('PRODUCTION MODE');
 }
-if (process.env.NODE_ENV === 'development') {
-  console.log('DEVELOPMENT MODE'); // eslint-disable-line no-console
+if (process.env.ENV === 'development') {
+  log('DEVELOPMENT MODE');
 }
 
-// Webpack HMR interface.
-interface ExtendedNodeModule extends NodeModule {
-  hot: { accept: () => void };
-}
-
-let vm: Vue;
-
-function main(): void {
-  import('scripts/locale/en.json').then((locale) => {
-    vm = new Vue({
-      el: '#root',
-      components: { Router },
-      render: (h): VNode => h(Router, { props: { locale: locale.default } }),
-    });
-    Vue.config.devtools = process.env.NODE_ENV !== 'production';
+async function main(): Promise<void> {
+  i18n();
+  const locale = await import('scripts/locale/en.json');
+  app = createApp(AppRouter, {
+    locale: locale.default,
   });
+  app.mount('#root');
 }
 
 // Ensures DOM is fully loaded before running app's main logic.
@@ -39,12 +32,7 @@ if (document.readyState === 'loading') {
 }
 
 // Ensures subscriptions to Store are correctly cleared when page is left, to prevent "ghost"
-// processing, by manually unmounting Vue components tree.
+// processing, by manually unmounting React components tree.
 window.addEventListener('beforeunload', () => {
-  vm.$destroy();
+  app.unmount();
 });
-
-// Enables Hot Module Rendering.
-if ((module as ExtendedNodeModule).hot) {
-  (module as ExtendedNodeModule).hot.accept();
-}
