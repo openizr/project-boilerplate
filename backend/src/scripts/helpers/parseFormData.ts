@@ -1,7 +1,6 @@
 import os from 'os';
 import path from 'path';
 import fs from 'fs-extra';
-import { generateId } from 'basx';
 import multiparty from 'multiparty';
 import { IncomingMessage as Payload } from 'http';
 import { BadRequest, RequestEntityTooLarge, UnprocessableEntity } from 'scripts/lib/errors';
@@ -34,6 +33,8 @@ export interface Options {
   maxFieldsSize?: number;
   allowedMimeTypes?: string[];
 }
+
+let increment = 0;
 
 /**
  * Parses `multipart/form-data` payload, and returns its data.
@@ -99,7 +100,8 @@ export default function parseFormData(payload: Payload, options: Options = {}): 
       } else {
         const fileIndex = totalFiles;
         totalFiles += 1;
-        const fileId = generateId();
+        const fileId = Date.now().toString(16) + increment;
+        increment += 1;
         const filePath = path.join(os.tmpdir(), fileId);
         const fileStream = fs.createWriteStream(filePath);
         const closeStream = (error: Error | null): void => {

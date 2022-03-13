@@ -1,13 +1,12 @@
 import Ajv from 'ajv';
 import fastify from 'fastify';
 import ajvErrors from 'ajv-errors';
-import 'source-map-support/register';
 import configuration from 'scripts/conf/app';
 import declareRoutes from 'scripts/conf/routes';
+import handleError from 'scripts/helpers/handleError';
+import formatError from 'scripts/helpers/formatError';
 import handleNotFound from 'scripts/helpers/handleNotFound';
 import { FastifyValidationResult } from 'fastify/types/schema.d';
-import createErrorHandler from 'scripts/helpers/createErrorHandler';
-import createErrorFormatter from 'scripts/helpers/createErrorFormatter';
 
 // Initializing validator compiler...
 const ajv = new Ajv({
@@ -21,15 +20,16 @@ ajvErrors(ajv);
 // Initializing fastify server...
 const app = fastify({
   logger: configuration.logger,
+  trustProxy: configuration.trustedProxies,
   keepAliveTimeout: configuration.keepAliveTimeout,
   connectionTimeout: configuration.connectionTimeout,
   ignoreTrailingSlash: configuration.ignoreTrailingSlash,
 });
 
 // Default errors handlers.
+app.setErrorHandler(handleError);
 app.setNotFoundHandler(handleNotFound);
-app.setErrorHandler(createErrorHandler(configuration.mode));
-app.setSchemaErrorFormatter(createErrorFormatter());
+app.setSchemaErrorFormatter(formatError);
 
 // Handles CORS in development mode.
 if (configuration.mode === 'development') {
@@ -52,7 +52,7 @@ app.setValidatorCompiler(({ schema }) => (
 
 // Logs requests timeouts.
 app.addHook('onTimeout', (request, _response, done) => {
-  app.log.error(`Error: request "${request.method} ${request.url}" timed out.`);
+  app.log.error(new Error(`Request "${request.method} ${request.url}" timed out.`));
   done();
 });
 

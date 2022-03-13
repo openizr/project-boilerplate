@@ -5,12 +5,6 @@ Object {
   "body": Object {
     "additionalProperties": false,
     "errorMessage": Object {
-      "properties": Object {
-        "message": "Body.message must be a string.",
-      },
-      "required": Object {
-        "message": "Body.message is required.",
-      },
       "type": "must be a valid object.",
     },
     "properties": Object {

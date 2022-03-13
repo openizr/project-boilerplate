@@ -2,12 +2,10 @@
  * multiparty mock.
  */
 
-/* eslint-disable class-methods-use-this, @typescript-eslint/no-explicit-any */
-
 class Form {
-  on(eventName: string, callback: (...args: any[]) => void): void {
+  on(eventName: string, callback: (...args: Any[]) => void): void {
     if (process.env.MUTIPARTY_NO_FIELD === 'true') {
-      callback();
+      callback(this);
     } else {
       setImmediate(() => {
         if (eventName === 'error' && process.env.MUTIPARTY_ERROR_FIELD_TOO_LARGE === 'true') {
@@ -20,7 +18,7 @@ class Form {
           callback(new Error('other error'));
         } else if (eventName === 'part') {
           callback({
-            on: (partEventName: string, partCallback: (...args: any[]) => void): void => {
+            on: (partEventName: string, partCallback: (...args: Any[]) => void): void => {
               if (partEventName === 'data') {
                 partCallback({ length: 100 });
               }
@@ -36,8 +34,8 @@ class Form {
     }
   }
 
-  parse(): null {
-    return null;
+  parse(): Form {
+    return this;
   }
 }
 export default {

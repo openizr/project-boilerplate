@@ -15,17 +15,7 @@ export default {
     body: {
       required: ['message'],
       properties: {
-        message: {
-          type: 'string',
-        },
-      },
-      errorMessage: {
-        properties: {
-          message: 'Body.message must be a string.',
-        },
-        required: {
-          message: 'Body.message is required.',
-        },
+        message: { type: 'string' },
       },
     },
     response: {

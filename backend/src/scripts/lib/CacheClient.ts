@@ -12,22 +12,14 @@ export default {
   delete(key: string): Promise<void> {
     return fs.remove(`${cachePath}/${key}`);
   },
-  get(key: string): Promise<(string | null)> {
-    return new Promise((resolve, reject) => {
-      if (fs.existsSync(`${cachePath}/${key}`)) {
-        return fs.readFile(`${cachePath}/${key}`, (error, content) => {
-          if (error !== null) {
-            return reject(error);
-          }
-          const cache = JSON.parse(content.toString());
-          return resolve(
-            (cache.expiration === -1 || Date.now() <= cache.expiration)
-              ? cache.data
-              : null,
-          );
-        });
-      }
-      return resolve(null);
-    });
+  async get(key: string): Promise<(string | null)> {
+    if (fs.existsSync(`${cachePath}/${key}`)) {
+      const content = await fs.readFile(`${cachePath}/${key}`);
+      const cache = JSON.parse(content.toString());
+      return (cache.expiration === -1 || Date.now() <= cache.expiration)
+        ? cache.data
+        : null;
+    }
+    return null;
   },
 };
