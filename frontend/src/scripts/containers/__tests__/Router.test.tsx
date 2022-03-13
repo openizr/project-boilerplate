@@ -2,65 +2,52 @@
  * @jest-environment jsdom
  */
 
-import React from 'react';
-import store from 'scripts/store/index';
-import { act } from 'react-dom/test-utils';
+import * as React from 'react';
 import Router from 'scripts/containers/Router';
-import { render, unmountComponentAtNode } from 'react-dom';
-
-type Misc = any; // eslint-disable-line @typescript-eslint/no-explicit-any
-let container = document.createElement('div');
+import { render } from '@testing-library/react';
 
 // Useful mocks allowing us to easily test React lazy components and Suspense.
 jest.mock('react', () => {
   const MockedReact = jest.requireActual('react');
-  MockedReact.Suspense = ({ children, fallback }: Misc): Misc => (
+  MockedReact.Suspense = ({ children, fallback }: Any): Any => (
     process.env.LOADING === 'true' ? fallback : children
   );
-  MockedReact.lazy = (callback: Misc): Misc => callback();
+  MockedReact.lazy = (callback: Any): Any => callback();
   return MockedReact;
 });
 
 jest.mock('scripts/store/routes', () => ({
   // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  '/': (): Misc => require('scripts/pages/Home').default,
+  '/': (): Any => require('scripts/pages/Home').default,
+}));
+
+jest.mock('scripts/store/index', () => ({
+  mutate: jest.fn(),
+  dispatch: jest.fn(),
+  useCombiner: jest.fn((_hash, callback) => callback({ route: (process.env.NOT_FOUND === 'true' ? null : '/') })),
 }));
 
 describe('react/Router', () => {
   beforeEach(() => {
-    process.env.LOADING = 'false';
-    container = document.createElement('div');
-    document.body.appendChild(container);
     jest.clearAllMocks();
-  });
-
-  afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    ((container as unknown) as null) = null;
+    delete process.env.LOADING;
+    delete process.env.NOT_FOUND;
   });
 
   test('renders correctly - loading page', () => {
     process.env.LOADING = 'true';
-    act(() => {
-      render(<Router locale={{ LABEL_TEST: 'Test' }} />, container);
-    });
-    expect(container).toMatchSnapshot();
+    const { container } = render(<Router locale={{ LABEL_TEST: 'Test' }} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('renders correctly - found page', () => {
-    store.mutate('router', 'NAVIGATE', '/');
-    act(() => {
-      render(<Router locale={{ LABEL_TEST: 'Test' }} />, container);
-    });
-    expect(container).toMatchSnapshot();
+    const { container } = render(<Router locale={{ LABEL_TEST: 'Test' }} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('renders correctly - not found page', () => {
-    store.mutate('router', 'NAVIGATE', '/404');
-    act(() => {
-      render(<Router locale={{ LABEL_TEST: 'Test' }} />, container);
-    });
-    expect(container).toMatchSnapshot();
+    process.env.NOT_FOUND = 'true';
+    const { container } = render(<Router locale={{ LABEL_TEST: 'Test' }} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

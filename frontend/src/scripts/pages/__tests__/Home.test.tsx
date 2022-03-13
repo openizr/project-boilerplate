@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import React from 'react';
+import * as React from 'react';
 import Home from 'scripts/pages/Home';
 import { act } from 'react-dom/test-utils';
 import { render, unmountComponentAtNode } from 'react-dom';
@@ -24,7 +24,7 @@ describe('react/Home', () => {
 
   test('renders correctly - basic', () => {
     act(() => {
-      render(<Home translate={(label: string): string => label} />, container);
+      render(<Home locale={{ LABEL_TEST: 'Test' }} />, container);
     });
     expect(container).toMatchSnapshot();
   });

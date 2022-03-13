@@ -2,24 +2,18 @@
 
 exports[`components/ErrorWrapper renders correctly - basic 1`] = `
 <div>
-  <div>
-    success
-  </div>
+  success
 </div>
 `;
 
 exports[`components/ErrorWrapper renders correctly - error, handler 1`] = `
 <div>
-  <div>
-    error
-  </div>
+  error
 </div>
 `;
 
 exports[`components/ErrorWrapper renders correctly - error, no handler 1`] = `
 <div>
-  <div>
-    error
-  </div>
+  error
 </div>
 `;

@@ -2,8 +2,6 @@
 
 exports[`components/Loader renders correctly - basic 1`] = `
 <div>
-  <div>
-    Loading...
-  </div>
+  Loading...
 </div>
 `;

@@ -1,24 +1,21 @@
-/* istanbul ignore file */
-
 import 'styles/main.scss';
+import i18n from 'basx/i18n';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Router from 'scripts/containers/Router';
 import ErrorWrapper from 'scripts/components/ErrorWrapper';
 
-if (process.env.NODE_ENV === 'production') {
-  console.log('PRODUCTION MODE'); // eslint-disable-line no-console
-}
-if (process.env.NODE_ENV === 'development') {
-  console.log('DEVELOPMENT MODE'); // eslint-disable-line no-console
-}
+const { log } = console;
 
-// Webpack HMR interface.
-interface ExtendedNodeModule extends NodeModule {
-  hot: { accept: () => void };
+if (process.env.ENV === 'production') {
+  log('PRODUCTION MODE');
+}
+if (process.env.ENV === 'development') {
+  log('DEVELOPMENT MODE');
 }
 
 function main(): void {
+  i18n();
   import('scripts/locale/en.json').then((locale) => {
     ReactDOM.render(
       <React.StrictMode>
@@ -45,8 +42,3 @@ if (document.readyState === 'loading') {
 window.addEventListener('beforeunload', () => {
   ReactDOM.unmountComponentAtNode(document.querySelector('#root') as Element);
 });
-
-// Enables Hot Module Rendering.
-if ((module as ExtendedNodeModule).hot) {
-  (module as ExtendedNodeModule).hot.accept();
-}

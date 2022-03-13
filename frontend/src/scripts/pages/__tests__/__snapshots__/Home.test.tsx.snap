@@ -11,7 +11,7 @@ exports[`react/Home renders correctly - basic 1`] = `
       alt="test"
       src="file"
     />
-    LABEL_TEST
+    Test
   </p>
 </div>
 `;

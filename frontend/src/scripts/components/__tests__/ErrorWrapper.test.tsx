@@ -3,53 +3,36 @@
  */
 
 import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
 import ErrorWrapper from 'scripts/components/ErrorWrapper';
-import { render, unmountComponentAtNode } from 'react-dom';
 
 describe('components/ErrorWrapper', () => {
-  const logger = console;
-  logger.error = jest.fn();
+  Object.assign(console, { error: jest.fn() });
   const { error } = console;
-  let container = document.createElement('div');
 
   beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
     jest.clearAllMocks();
   });
 
-  afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    ((container as unknown) as null) = null;
-  });
-
   test('renders correctly - basic', () => {
-    act(() => {
-      render(
-        <ErrorWrapper fallback={<div>error</div>}>
-          <div>success</div>
-        </ErrorWrapper>,
-        container,
-      );
-    });
-    expect(container).toMatchSnapshot();
+    const { container } = render(
+      <ErrorWrapper fallback={<div>error</div>}>
+        <div>success</div>
+      </ErrorWrapper>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('renders correctly - error, no handler', () => {
     const ErrorComponent = (): JSX.Element => {
       throw new Error();
     };
-    act(() => {
-      render(
-        <ErrorWrapper fallback={<div>error</div>}>
-          <ErrorComponent />
-        </ErrorWrapper>,
-        container,
-      );
-    });
-    expect(container).toMatchSnapshot();
+    const { container } = render(
+      <ErrorWrapper fallback={<div>error</div>}>
+        <ErrorComponent />
+      </ErrorWrapper>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
     expect(error).toHaveBeenCalledTimes(2);
   });
 
@@ -58,19 +41,16 @@ describe('components/ErrorWrapper', () => {
     const ErrorComponent = (): JSX.Element => {
       throw new Error();
     };
-    act(() => {
-      render(
-        <ErrorWrapper fallback={<div>error</div>} onError={onError}>
-          <ErrorComponent />
-        </ErrorWrapper>,
-        container,
-      );
-    });
-    expect(container).toMatchSnapshot();
+    const { container } = render(
+      <ErrorWrapper fallback={<div>error</div>} onError={onError}>
+        <ErrorComponent />
+      </ErrorWrapper>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
     expect(error).toHaveBeenCalledTimes(2);
     expect(onError).toHaveBeenCalledTimes(1);
     expect(onError).toHaveBeenCalledWith(new Error(), {
-      componentStack: '\n    at ErrorComponent (/var/www/html/src/scripts/components/__tests__/ErrorWrapper.test.tsx:58:13)\n    at ErrorWrapper (/var/www/html/src/scripts/components/ErrorWrapper.tsx:33:5)',
+      componentStack: '\n    at ErrorComponent (/var/www/html/src/scripts/components/__tests__/ErrorWrapper.test.tsx:42:13)\n    at ErrorWrapper (/var/www/html/src/scripts/components/ErrorWrapper.tsx:33:5)',
     });
   });
 });

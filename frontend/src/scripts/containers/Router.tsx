@@ -1,19 +1,16 @@
-import { i18n } from 'basx';
-import store from 'scripts/store';
+import { Locale } from 'basx/i18n';
 import React, { Suspense } from 'react';
 import routes from 'scripts/store/routes';
-import useStore from 'diox/connectors/react';
+import { useCombiner } from 'scripts/store';
 import Loader from 'scripts/components/Loader';
 import PropTypes, { InferProps } from 'prop-types';
 import { RoutingContext } from 'diox/extensions/router';
 
 type LazyComponent = () => Promise<{
   default: React.ComponentType<{
-    translate: (label: string, values: Record<string, string>) => string
+    locale: Locale;
   }>
 }>;
-
-const [useCombiner] = useStore(store);
 
 const propTypes = {
   locale: PropTypes.instanceOf(Object).isRequired,
@@ -24,12 +21,12 @@ const propTypes = {
  */
 export default function Router(props: InferProps<typeof propTypes>): JSX.Element {
   const { locale } = props;
-  const [route] = useCombiner('router', (newState: RoutingContext) => newState.route || '');
+  const route = useCombiner('router', (newState: RoutingContext) => newState.route || '');
 
   let currentPage = null;
   if (routes[route] !== undefined) {
     const Component = React.lazy(routes[route] as LazyComponent);
-    currentPage = <Component translate={i18n(locale as Record<string, string>)} />;
+    currentPage = <Component locale={locale} />;
   }
 
   return (

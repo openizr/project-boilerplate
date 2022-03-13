@@ -3,17 +3,17 @@ import Message from 'scripts/components/Message';
 import PropTypes, { InferProps } from 'prop-types';
 
 const propTypes = {
-  translate: PropTypes.func.isRequired,
+  locale: PropTypes.objectOf(PropTypes.any.isRequired).isRequired,
 };
 
 /**
  * Home page.
  */
 export default function Home(props: InferProps<typeof propTypes>): JSX.Element {
-  const { translate } = props;
+  const { locale } = props;
 
   return (
-    <Message label={translate('LABEL_TEST')} />
+    <Message label={locale.LABEL_TEST} />
   );
 }
 

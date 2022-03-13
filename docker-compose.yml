@@ -19,7 +19,7 @@ services:
       - .env
     ports:
       - "${HOST_IP}:${FRONTEND_PORT}:${FRONTEND_PORT}"
-    command: sh -c "yarn && yarn run dev"
+    command: sh -c "tail -f /dev/null"
     volumes:
       - ./frontend:/var/www/html
     restart: unless-stopped
