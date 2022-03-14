@@ -62,8 +62,18 @@ describe('scripts/main', () => {
       expect(log).toHaveBeenCalledTimes(1);
       expect(log).toHaveBeenCalledWith('PRODUCTION MODE');
       expect(error).toHaveBeenCalledTimes(4);
-      expect(error).toHaveBeenCalledWith('Error', { level: 'error', from: 'frontend', environment: 'production' });
-      expect(error).toHaveBeenCalledWith('Error', { level: 'fatal', from: 'frontend', environment: 'production' });
+      expect(error).toHaveBeenCalledWith('Error', {
+        level: 'error',
+        from: 'frontend',
+        environment: 'production',
+        message: '',
+        stack: expect.any(String),
+      });
+      expect(error).toHaveBeenCalledWith('Error', {
+        level: 'fatal',
+        from: 'frontend',
+        environment: 'production',
+      });
       expect(error).toHaveBeenCalledWith('Error', {
         level: 'fatal',
         from: 'frontend',

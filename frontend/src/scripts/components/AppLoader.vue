@@ -1,4 +1,4 @@
-<!-- AppLoader. -->
+<!-- App loader. -->
 
 <script lang="ts" setup>
 </script>

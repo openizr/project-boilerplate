@@ -1,18 +1,26 @@
 <!-- App router. -->
 
 <script lang="ts" setup>
+import {
+  ref,
+  onMounted,
+  onErrorCaptured,
+  defineAsyncComponent,
+} from 'vue';
 import { Locale } from 'basx/i18n';
 import loadLocale from 'scripts/locale';
 import routes from 'scripts/store/routes';
 import { useCombiner } from 'scripts/store/index';
 import ErrorPage from 'scripts/pages/ErrorPage.vue';
+import monitoring from 'scripts/services/monitoring';
 import { RoutingContext } from 'diox/extensions/router';
 import AppLoader from 'scripts/components/AppLoader.vue';
 import NotFoundPage from 'scripts/pages/NotFoundPage.vue';
-import { defineAsyncComponent, onMounted, ref } from 'vue';
 
-const locale = ref<Locale | null>(null);
 const loading = ref<boolean>(true);
+const locale = ref<Locale | null>(null);
+const hasError = ref<boolean>(false);
+
 const router = useCombiner<RoutingContext>('router', (newState) => {
   // FOR REDIRECT LOGIC ONLY.
   // const newRoute = newState.path;
@@ -33,6 +41,12 @@ const lazyComponents = Object.keys(routes).reduce((components, currentRoute) => 
   }),
 }), {});
 
+onErrorCaptured((error) => {
+  monitoring.captureError('error', error);
+  hasError.value = true;
+  return false;
+});
+
 onMounted(() => {
   loadLocale().then((newLocale) => {
     locale.value = newLocale;
@@ -42,6 +56,10 @@ onMounted(() => {
 
 <template>
   <app-loader v-if="locale === null || loading" />
+  <error-page
+    v-else-if="hasError === true"
+    :locale="locale"
+  />
   <component
     :is="lazyComponents[router.route]"
     v-else-if="routes[router.route] !== undefined && locale !== null"

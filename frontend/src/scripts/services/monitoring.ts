@@ -43,7 +43,8 @@ export default {
       logger.error('Error', {
         level,
         from: 'frontend',
-        ...error,
+        stack: error.stack,
+        message: error.message,
         environment: process.env.ENV,
       });
     }

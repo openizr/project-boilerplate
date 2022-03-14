@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containers/AppRouter renders correctly - error 1`] = `
+<div>
+  Error.object
+</div>
+`;
+
 exports[`containers/AppRouter renders correctly - loading page 1`] = `
 <div>
   Loading...
