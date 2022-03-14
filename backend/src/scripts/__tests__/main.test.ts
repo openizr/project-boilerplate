@@ -3,12 +3,16 @@
 import cacheClient from 'scripts/conf/services';
 import * as fastify from 'scripts/__mocks__/fastify';
 
-jest.spyOn(process, 'exit').mockImplementation((code: number | undefined) => code as unknown as never);
-
 describe('main', () => {
+  jest.spyOn(process, 'exit').mockImplementation((code: number | undefined) => code as unknown as never);
+  Object.assign(console, { error: jest.fn() });
+  const { error } = console;
+
   beforeEach(() => {
     process.env.BACKEND_PORT = '4000';
     process.env.ENV = 'test';
+    delete process.env.FASTIFY_REQUEST_TYPE;
+    delete process.env.FASTIFY_CONTENT_TYPE;
     jest.clearAllMocks();
   });
 
@@ -41,6 +45,7 @@ describe('main', () => {
       expect(fastify.addHook).toHaveBeenCalledWith('onTimeout', expect.any(Function));
       expect(fastify.listen).toHaveBeenCalledTimes(1);
       expect(fastify.listen).toHaveBeenCalledWith(9000, '0.0.0.0', expect.any(Function));
+      expect(error).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -73,8 +78,7 @@ describe('main', () => {
       expect(fastify.addHook).toHaveBeenCalledWith('onTimeout', expect.any(Function));
       expect(fastify.listen).toHaveBeenCalledTimes(1);
       expect(fastify.listen).toHaveBeenCalledWith(9000, '0.0.0.0', expect.any(Function));
-      delete process.env.FASTIFY_REQUEST_TYPE;
-      delete process.env.FASTIFY_CONTENT_TYPE;
+      expect(error).toHaveBeenCalledTimes(0);
     });
   });
 
@@ -95,6 +99,34 @@ describe('main', () => {
       expect(fastify.addHook).toHaveBeenCalledWith('onTimeout', expect.any(Function));
       expect(fastify.listen).toHaveBeenCalledTimes(1);
       expect(fastify.listen).toHaveBeenCalledWith(4000, '0.0.0.0', expect.any(Function));
+      expect(error).toHaveBeenCalledTimes(2);
+      expect(error).toHaveBeenCalledWith({
+        distinctId: 'project-boilerplate',
+        event: 'Error',
+        properties: {
+          code: 'request_timeout',
+          environment: 'production',
+          from: 'TBD',
+          headers: [],
+          level: 'error',
+          message: 'Request "OPTIONS undefined" timed out.',
+          method: 'OPTIONS',
+          url: undefined,
+          statusCode: 504,
+          stack: expect.any(String),
+        },
+      });
+      expect(error).toHaveBeenCalledWith({
+        distinctId: 'project-boilerplate',
+        event: 'Error',
+        properties: {
+          environment: 'production',
+          from: 'TBD',
+          level: 'fatal',
+          message: undefined,
+          url: undefined,
+        },
+      });
     });
   });
 });

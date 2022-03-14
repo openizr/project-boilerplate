@@ -2,6 +2,7 @@
  * Fastify mock.
  */
 const addHook = jest.fn((_event, callback) => callback({
+  headers: {},
   method: (process.env.FASTIFY_REQUEST_TYPE || 'OPTIONS'),
 }, {
   header: jest.fn(),

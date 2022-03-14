@@ -1,3 +1,4 @@
+import { captureError } from 'scripts/helpers/monitoring';
 import Ajv from 'ajv';
 import fastify from 'fastify';
 import ajvErrors from 'ajv-errors';
@@ -52,7 +53,17 @@ app.setValidatorCompiler(({ schema }) => (
 
 // Logs requests timeouts.
 app.addHook('onTimeout', (request, _response, done) => {
-  app.log.error(new Error(`Request "${request.method} ${request.url}" timed out.`));
+  const error = new Error(`Request "${request.method} ${request.url}" timed out.`);
+  app.log.error(error);
+  captureError('error', configuration.appId, {
+    code: 'request_timeout',
+    message: error.message,
+    stack: error.stack,
+    statusCode: 504,
+    url: request.url,
+    method: request.method,
+    headers: Object.keys(request.headers),
+  });
   done();
 });
 
@@ -75,6 +86,7 @@ declareRoutes(app);
 app.listen(configuration.port, '0.0.0.0', (error) => {
   if (error) {
     app.log.fatal(error);
+    captureError('fatal', configuration.appId, { message: error.message, stack: error.stack });
     process.exit(1);
   }
 });

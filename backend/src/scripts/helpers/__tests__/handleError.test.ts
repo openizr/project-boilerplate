@@ -18,7 +18,7 @@ describe('helpers/handleError', () => {
   const logError = jest.fn();
   const status = jest.fn(() => ({ send }));
   const response = <FastifyReply>({ status } as unknown);
-  const request = <FastifyRequest>({ log: { error: logError } } as unknown);
+  const request = <FastifyRequest>({ log: { error: logError }, headers: {} } as unknown);
 
   beforeEach(() => {
     jest.clearAllMocks();

@@ -2,6 +2,8 @@
  * App configuration.
  */
 export default {
+  // App identifier, for monitoring.
+  appId: <string>process.env.PROJECT_NAME,
   // Mode (development | production).
   mode: <string>process.env.ENV,
   // Server's port.
