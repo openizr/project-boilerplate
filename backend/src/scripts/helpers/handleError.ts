@@ -10,6 +10,7 @@ import {
   UnprocessableEntity,
   RequestEntityTooLarge,
 } from 'scripts/lib/errors';
+import { captureError } from 'scripts/helpers/monitoring';
 import { FastifyError, FastifyRequest as Request, FastifyReply as Reply } from 'fastify';
 
 /**
@@ -63,6 +64,17 @@ export default function handleError(error: FastifyError, request: Request, respo
     errorCode = error.code;
     message = error.message;
   }
+
+  // Sending errors to the monitoring system...
+  captureError((statusCode === 500) ? 'error' : 'info', 'TBD', {
+    code: error.code,
+    message: error.message,
+    stack: <string>error.stack,
+    statusCode,
+    url: request.url,
+    method: request.method,
+    headers: Object.keys(request.headers),
+  });
 
   response
     .status(statusCode)
