@@ -1,7 +1,9 @@
+/* eslint-disable global-require */
+
 describe('helpers/formatError', () => {
   jest.spyOn(process, 'exit').mockImplementation((code: number | undefined) => code as unknown as never);
   Object.assign(console, { error: jest.fn() });
-  process.on = jest.fn((_event, callback) => callback({ message: 'fatal error', stack: 'stack' }));
+  process.on = jest.fn((_event, callback) => callback({ message: 'fatal error', stack: 'stack' })) as Any;
   const { error } = console;
 
   beforeEach(() => {
