@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/Home renders correctly - basic 1`] = `
+<div>
+  <p>
+    <img
+      alt="test"
+      class="svelte-1int8dr"
+    />
+     
+    <img
+      alt="test"
+      class="svelte-1int8dr"
+    />
+     
+    Test
+  </p>
+</div>
+`;

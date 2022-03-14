@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/NotFound renders correctly - basic 1`] = `
+<div>
+  <div>
+    Not Found.
+    object
+  </div>
+</div>
+`;

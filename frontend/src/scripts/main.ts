@@ -1,11 +1,11 @@
 import 'styles/main.scss';
 import monitoring from 'scripts/services/monitoring';
 import i18n from 'basx/i18n';
-import { App, createApp } from 'vue';
-import AppRouter from 'scripts/containers/AppRouter.vue';
+import Router from 'scripts/containers/Router.svelte';
 
-let app: App;
 const { log } = console;
+
+let app: Router;
 
 if (process.env.ENV === 'production') {
   log('PRODUCTION MODE');
@@ -17,8 +17,12 @@ if (process.env.ENV === 'development') {
 i18n();
 
 async function main(): Promise<void> {
-  app = createApp(AppRouter);
-  app.mount('#root');
+  const target = document.querySelector('#root') as HTMLElement;
+  target.innerHTML = '';
+  app = new Router({
+    hydrate: false,
+    target,
+  });
 }
 
 // Ensures DOM is fully loaded before running app's main logic.
@@ -42,7 +46,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // Ensures subscriptions to Store are correctly cleared when page is left, to prevent "ghost"
-// processing, by manually unmounting React components tree.
+// processing, by manually unmounting Svelte components tree.
 window.addEventListener('beforeunload', () => {
-  app.unmount();
+  app.$destroy();
 });

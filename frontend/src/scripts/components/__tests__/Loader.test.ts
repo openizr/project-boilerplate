@@ -2,16 +2,16 @@
  * @jest-environment jsdom
  */
 
-import { render } from '@testing-library/vue';
-import AppLoader from 'scripts/components/AppLoader.vue';
+import { render } from '@testing-library/svelte';
+import Loader from 'scripts/components/Loader.svelte';
 
-describe('components/AppLoader', () => {
+describe('components/Loader', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   test('renders correctly - basic', () => {
-    const { container } = render(AppLoader);
+    const { container } = render(Loader);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

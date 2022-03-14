@@ -1,6 +1,6 @@
 import Store from 'diox';
 import routes from 'scripts/store/routes';
-import connect from 'diox/connectors/vue';
+import connect from 'diox/connectors/svelte';
 import router from 'diox/extensions/router';
 
 const store = new Store();

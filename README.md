@@ -22,12 +22,13 @@ Contains the back-end (server) codebase.
 Contains the front-end (in-browser UI) codebase.
 
 - `frontend/public`: public assets, served statically (HTML, JS, CSS, fonts, images, ...)
+- `frontend/src/html`: HTML entrypoints
 - `frontend/src/styles`: app-specific design SASS implementation
 - `frontend/src/images`: app-specific static graphic assets
-- `frontend/src/scripts/components`: UI components Vue implementation
-- `frontend/src/scripts/containers`: UI containers Vue implementation (based on [`diox`](https://github.com/openizr/diox))
+- `frontend/src/scripts/components`: UI components Svelte implementation
+- `frontend/src/scripts/containers`: UI containers Svelte implementation (based on [`diox`](https://github.com/openizr/diox))
 - `frontend/src/scripts/locale`: translated labels, one file per language
-- `frontend/src/scripts/pages`: UI pages Vue implementation
+- `frontend/src/scripts/pages`: UI pages Svelte implementation
 - `frontend/src/scripts/store`: store modules implementation (based on [`diox`](https://github.com/openizr/diox))
 
 

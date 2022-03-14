@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Router renders correctly - loading page 1`] = `
+<div>
+  <div>
+    Loading...
+  </div>
+  
+</div>
+`;
+
+exports[`containers/Router renders correctly - page found 1`] = `
+<div>
+  <p>
+    <img
+      alt="test"
+      class="svelte-1int8dr"
+    />
+     
+    <img
+      alt="test"
+      class="svelte-1int8dr"
+    />
+     
+    Test
+  </p>
+  
+  
+</div>
+`;
+
+exports[`containers/Router renders correctly - page not found 1`] = `
+<div>
+  <div>
+    Not Found.
+    object
+  </div>
+  
+</div>
+`;

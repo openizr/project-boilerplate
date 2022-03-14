@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 
-import { render } from '@testing-library/vue';
-import AppMessage from 'scripts/components/AppMessage.vue';
+import { render } from '@testing-library/svelte';
+import Message from 'scripts/components/Message.svelte';
 
 describe('components/AppMessage', () => {
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('components/AppMessage', () => {
   });
 
   test('renders correctly - basic', () => {
-    const { container } = render(AppMessage, { props: { label: 'test' } });
+    const { container } = render(Message, { props: { label: 'test' } });
     expect(container.firstChild).toMatchSnapshot();
   });
 });

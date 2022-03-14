@@ -3,5 +3,5 @@ interface Routes {
 }
 
 export default {
-  '/': () => import('scripts/pages/HomePage.vue'),
+  '/': () => import('scripts/pages/Home.svelte'),
 } as Routes;

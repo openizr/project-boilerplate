@@ -6,7 +6,7 @@ import store from 'scripts/store/index';
 import routes from 'scripts/store/routes';
 
 jest.mock('diox');
-jest.mock('diox/connectors/vue', () => jest.fn());
+jest.mock('diox/connectors/svelte', () => jest.fn());
 jest.mock('diox/extensions/router', () => jest.fn());
 
 describe('scripts/store', () => {

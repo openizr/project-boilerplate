@@ -1,3 +1,4 @@
 declare module '*.jpg';
 declare module '*.svg';
-declare module '*.vue';
+
+type Any = any; // eslint-disable-line @typescript-eslint/no-explicit-any

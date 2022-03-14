@@ -16,8 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "@testing-library/dom": "^8.11.3",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/vue": "^6.5.1",
+    "@testing-library/svelte": "^3.0.3",
+    "aria-query": "^5.0.0",
     "typescript-dev-kit": "^5.0.1"
   },
   "eslintConfig": {
@@ -28,7 +28,7 @@
   "dependencies": {
     "basx": "^2.0.1",
     "diox": "^5.0.2",
-    "vue": "^3.2.31"
+    "svelte": "^3.46.4"
   },
   "tsDevKitConfig": {
     "target": "web",

@@ -7,7 +7,7 @@
 jest.mock('diox', () => jest.fn());
 jest.mock('basx/i18n', () => jest.fn());
 Object.assign(console, { log: jest.fn(), error: jest.fn() });
-jest.mock('scripts/containers/AppRouter.vue', () => function AppRouter(): null {
+jest.mock('scripts/containers/Router.svelte', () => function AppRouter(): null {
   return null;
 });
 
