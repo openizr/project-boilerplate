@@ -1,10 +1,5 @@
 import sum from 'library';
 
-// Webpack HMR interface.
-interface ExtendedNodeModule extends NodeModule {
-  hot: { accept: () => void };
-}
-
 function main(): void {
   console.log(sum(1, 2, 3, 4, 5)); // eslint-disable-line no-console
 }
@@ -16,9 +11,4 @@ if (document.readyState === 'loading') {
   // `DOMContentLoaded` has already fired...
 } else {
   main();
-}
-
-// Enables Hot Module Rendering.
-if ((module as ExtendedNodeModule).hot) {
-  (module as ExtendedNodeModule).hot.accept();
 }
