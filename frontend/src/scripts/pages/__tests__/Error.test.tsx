@@ -3,16 +3,16 @@
  */
 
 import * as React from 'react';
-import Home from 'scripts/pages/Home';
+import Error from 'scripts/pages/Error';
 import { render } from '@testing-library/react';
 
-describe('pages/Home', () => {
+describe('pages/Error', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   test('renders correctly - basic', () => {
-    const { container } = render(<Home locale={{ LABEL_TEST: 'Test' }} />);
+    const { container } = render(<Error locale={{ LABEL_TEST: 'Test' }} />);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

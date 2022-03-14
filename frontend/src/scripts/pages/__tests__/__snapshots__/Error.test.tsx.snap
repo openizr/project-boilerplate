@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages/Error renders correctly - basic 1`] = `
+<div>
+  Error.
+  object
+</div>
+`;

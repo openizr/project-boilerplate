@@ -1,9 +1,9 @@
 import 'styles/main.scss';
+import monitoring from 'scripts/services/monitoring';
 import i18n from 'basx/i18n';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Router from 'scripts/containers/Router';
-import ErrorWrapper from 'scripts/components/ErrorWrapper';
 
 const { log } = console;
 
@@ -14,18 +14,15 @@ if (process.env.ENV === 'development') {
   log('DEVELOPMENT MODE');
 }
 
+i18n();
+
 function main(): void {
-  i18n();
-  import('scripts/locale/en.json').then((locale) => {
-    ReactDOM.render(
-      <React.StrictMode>
-        <ErrorWrapper fallback={<div>Error.</div>}>
-          <Router locale={locale.default} />
-        </ErrorWrapper>
-      </React.StrictMode>,
-      document.querySelector('#root'),
-    );
-  });
+  ReactDOM.render(
+    <React.StrictMode>
+      <Router />
+    </React.StrictMode>,
+    document.querySelector('#root'),
+  );
 }
 
 // Ensures DOM is fully loaded before running app's main logic.
@@ -35,6 +32,17 @@ if (document.readyState === 'loading') {
   // `DOMContentLoaded` has already fired...
 } else {
   main();
+}
+
+// Registers service worker if necessary.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      await navigator.serviceWorker.register('/serviceWorker.js');
+    } catch (error) {
+      monitoring.captureError('error', error as Error);
+    }
+  });
 }
 
 // Ensures subscriptions to Store are correctly cleared when page is left, to prevent "ghost"
