@@ -1,4 +1,5 @@
 import 'styles/main.scss';
+import monitoring from 'scripts/services/monitoring';
 import i18n from 'basx/i18n';
 import { App, createApp } from 'vue';
 import AppRouter from 'scripts/containers/AppRouter.vue';
@@ -13,12 +14,10 @@ if (process.env.ENV === 'development') {
   log('DEVELOPMENT MODE');
 }
 
+i18n();
+
 async function main(): Promise<void> {
-  i18n();
-  const locale = await import('scripts/locale/en.json');
-  app = createApp(AppRouter, {
-    locale: locale.default,
-  });
+  app = createApp(AppRouter);
   app.mount('#root');
 }
 
@@ -29,6 +28,17 @@ if (document.readyState === 'loading') {
   // `DOMContentLoaded` has already fired...
 } else {
   main();
+}
+
+// Registers service worker if necessary.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      await navigator.serviceWorker.register('/serviceWorker.js');
+    } catch (error) {
+      monitoring.captureError('error', error as Error);
+    }
+  });
 }
 
 // Ensures subscriptions to Store are correctly cleared when page is left, to prevent "ghost"

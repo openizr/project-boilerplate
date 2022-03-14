@@ -1,19 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`containers/AppRouter renders correctly - loading page 1`] = `
-<div
-  locale="[object Object]"
->
+<div>
   Loading...
 </div>
 `;
 
 exports[`containers/AppRouter renders correctly - page found 1`] = `
-<div
-  locale="[object Object]"
->
-  Loading...
-</div>
+<p>
+  <img
+    alt="test"
+    src="file"
+  />
+  <img
+    alt="test"
+    src="file"
+  />
+   Test
+</p>
 `;
 
-exports[`containers/AppRouter renders correctly - page not found 1`] = `<!--v-if-->`;
+exports[`containers/AppRouter renders correctly - page not found 1`] = `
+<div>
+  Not Found.object
+</div>
+`;
