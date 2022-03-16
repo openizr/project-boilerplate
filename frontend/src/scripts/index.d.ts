@@ -1,4 +1,5 @@
 declare module '*.jpg';
 declare module '*.svg';
+declare module '*.svelte';
 
-type Any = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+declare type Any = any; // eslint-disable-line @typescript-eslint/no-explicit-any

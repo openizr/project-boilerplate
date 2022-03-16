@@ -1,11 +1,12 @@
 import 'styles/main.scss';
 import monitoring from 'scripts/services/monitoring';
 import i18n from 'basx/i18n';
+import type { SvelteComponent } from 'svelte';
 import Router from 'scripts/containers/Router.svelte';
 
 const { log } = console;
 
-let app: Router;
+let app: SvelteComponent;
 
 if (process.env.ENV === 'production') {
   log('PRODUCTION MODE');
