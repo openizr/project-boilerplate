@@ -5,7 +5,8 @@ import connect from 'diox/connectors/react';
 
 const store = new Store();
 const useCombiner = connect(store);
-const { mutate, dispatch } = store;
+const mutate = store.mutate.bind(store);
+const dispatch = store.dispatch.bind(store);
 store.register('router', router(Object.keys(routes)));
 
 export default store;
